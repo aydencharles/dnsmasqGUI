@@ -7,6 +7,7 @@ struct dnsmasqGUIApp: App {
     @StateObject private var configManager = ConfigManager()
     @StateObject private var dnsmasqService = DnsmasqService()
     @StateObject private var logReader = LogReader()
+    @StateObject private var languageManager = LanguageManager.shared
     @State private var showAbout = false
     @State private var showHelp = false
 
@@ -18,6 +19,7 @@ struct dnsmasqGUIApp: App {
                 .environmentObject(configManager)
                 .environmentObject(dnsmasqService)
                 .environmentObject(logReader)
+                .environmentObject(languageManager)
                 .sheet(isPresented: $showAbout) {
                     AboutView()
                 }
@@ -28,32 +30,33 @@ struct dnsmasqGUIApp: App {
                     // Initialize menu bar with dnsmasq service
                     appDelegate.setupMenuBar(dnsmasqService: dnsmasqService)
                 }
+                .id(languageManager.selectedLanguage)
         }
         .commands {
             // Replace About menu
             CommandGroup(replacing: .appInfo) {
-                Button("About Handed") {
+                Button("About Handed".localized) {
                     showAbout = true
                 }
             }
 
             // Help menu
             CommandGroup(replacing: .help) {
-                Button("Handed Help") {
+                Button("Handed Help".localized) {
                     showHelp = true
                 }
                 .keyboardShortcut("?", modifiers: [.command])
 
                 Divider()
 
-                Link("GitHub Repository", destination: URL(string: "https://github.com/thejustinjames/handed")!)
+                Link("GitHub Repository".localized, destination: URL(string: "https://github.com/thejustinjames/handed")!)
 
-                Link("Report an Issue", destination: URL(string: "https://github.com/thejustinjames/handed/issues")!)
+                Link("Report an Issue".localized, destination: URL(string: "https://github.com/thejustinjames/handed/issues")!)
             }
 
             // Service commands
             CommandGroup(after: .appSettings) {
-                Button("Reload Configuration") {
+                Button("Reload Configuration".localized) {
                     Task {
                         await configManager.loadConfig()
                     }
@@ -62,21 +65,21 @@ struct dnsmasqGUIApp: App {
 
                 Divider()
 
-                Button("Start Service") {
+                Button("Start Service".localized) {
                     Task {
                         await dnsmasqService.start()
                     }
                 }
                 .keyboardShortcut("s", modifiers: [.command, .shift])
 
-                Button("Stop Service") {
+                Button("Stop Service".localized) {
                     Task {
                         await dnsmasqService.stop()
                     }
                 }
                 .keyboardShortcut("x", modifiers: [.command, .shift])
 
-                Button("Restart Service") {
+                Button("Restart Service".localized) {
                     Task {
                         await dnsmasqService.restart()
                     }
@@ -119,6 +122,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         updateActivationPolicy()
         // Apply saved appearance mode
         applyAppearance()
+        
+        // Listen for language changes to rebuild menu bar
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(languageChanged),
+            name: Notification.Name("AppLanguageChanged"),
+            object: nil
+        )
+    }
+
+    @objc private func languageChanged() {
+        updateStatusButton()
+        setupMenu()
     }
 
     private func updateActivationPolicy() {
@@ -157,7 +173,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.dnsmasqService = dnsmasqService
 
         // Create status item
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        if statusItem == nil {
+            statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        }
 
         updateStatusButton()
         setupMenu()
@@ -215,15 +233,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func setupMenu() {
         let menu = NSMenu()
-        menu.title = "Handed - DNSmasqGUI"
+        menu.title = "Handed - DNSmasqGUI".localized
 
         let state = dnsmasqService?.status.state ?? .unknown
 
         // App title header
-        let titleItem = NSMenuItem(title: "Handed - DNSmasqGUI", action: nil, keyEquivalent: "")
+        let titleItem = NSMenuItem(title: "Handed - DNSmasqGUI".localized, action: nil, keyEquivalent: "")
         titleItem.isEnabled = false
         if let font = NSFont.boldSystemFont(ofSize: 13) as NSFont? {
-            titleItem.attributedTitle = NSAttributedString(string: "Handed - DNSmasqGUI", attributes: [.font: font])
+            titleItem.attributedTitle = NSAttributedString(string: "Handed - DNSmasqGUI".localized, attributes: [.font: font])
         }
         menu.addItem(titleItem)
 
@@ -233,13 +251,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let statusText: String
         switch state {
         case .running:
-            statusText = "● dnsmasq is running"
+            statusText = "● dnsmasq is running".localized
         case .stopped:
-            statusText = "○ dnsmasq is stopped"
+            statusText = "○ dnsmasq is stopped".localized
         case .error:
-            statusText = "✕ dnsmasq error"
+            statusText = "✕ dnsmasq error".localized
         case .unknown:
-            statusText = "? dnsmasq status unknown"
+            statusText = "? dnsmasq status unknown".localized
         }
 
         let statusMenuItem = NSMenuItem(title: statusText, action: nil, keyEquivalent: "")
@@ -249,28 +267,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem.separator())
 
         // Service controls
-        let startItem = NSMenuItem(title: "Start dnsmasq", action: #selector(startService), keyEquivalent: "")
+        let startItem = NSMenuItem(title: "Start dnsmasq".localized, action: #selector(startService), keyEquivalent: "")
         startItem.target = self
         startItem.isEnabled = state != .running
         menu.addItem(startItem)
 
-        let stopItem = NSMenuItem(title: "Stop dnsmasq", action: #selector(stopService), keyEquivalent: "")
+        let stopItem = NSMenuItem(title: "Stop dnsmasq".localized, action: #selector(stopService), keyEquivalent: "")
         stopItem.target = self
         stopItem.isEnabled = state == .running
         menu.addItem(stopItem)
 
-        let restartItem = NSMenuItem(title: "Restart dnsmasq", action: #selector(restartService), keyEquivalent: "")
+        let restartItem = NSMenuItem(title: "Restart dnsmasq".localized, action: #selector(restartService), keyEquivalent: "")
         restartItem.target = self
         menu.addItem(restartItem)
 
         menu.addItem(NSMenuItem.separator())
 
         // Quick actions
-        let flushItem = NSMenuItem(title: "Flush DNS Cache", action: #selector(flushDNSCache), keyEquivalent: "")
+        let flushItem = NSMenuItem(title: "Flush DNS Cache".localized, action: #selector(flushDNSCache), keyEquivalent: "")
         flushItem.target = self
         menu.addItem(flushItem)
 
-        let refreshItem = NSMenuItem(title: "Refresh Status", action: #selector(refreshStatus), keyEquivalent: "")
+        let refreshItem = NSMenuItem(title: "Refresh Status".localized, action: #selector(refreshStatus), keyEquivalent: "")
         refreshItem.target = self
         menu.addItem(refreshItem)
 
@@ -279,31 +297,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Preferences submenu
         let prefsSubmenu = NSMenu()
 
-        let menuBarOnlyItem = NSMenuItem(title: "Menu Bar Only (Hide Dock Icon)", action: #selector(toggleMenuBarOnly), keyEquivalent: "")
+        let menuBarOnlyItem = NSMenuItem(title: "Menu Bar Only (Hide Dock Icon)".localized, action: #selector(toggleMenuBarOnly), keyEquivalent: "")
         menuBarOnlyItem.target = self
         menuBarOnlyItem.state = isMenuBarOnly ? .on : .off
         prefsSubmenu.addItem(menuBarOnlyItem)
 
-        let launchItem = NSMenuItem(title: "Launch at Startup", action: #selector(toggleLaunchAtStartup), keyEquivalent: "")
+        let launchItem = NSMenuItem(title: "Launch at Startup".localized, action: #selector(toggleLaunchAtStartup), keyEquivalent: "")
         launchItem.target = self
         launchItem.state = launchAtStartup ? .on : .off
         prefsSubmenu.addItem(launchItem)
 
-        let prefsItem = NSMenuItem(title: "Preferences", action: nil, keyEquivalent: "")
+        let prefsItem = NSMenuItem(title: "Preferences".localized, action: nil, keyEquivalent: "")
         prefsItem.submenu = prefsSubmenu
         menu.addItem(prefsItem)
 
         menu.addItem(NSMenuItem.separator())
 
         // Open main window
-        let openItem = NSMenuItem(title: "Open Handed", action: #selector(openMainWindow), keyEquivalent: "")
+        let openItem = NSMenuItem(title: "Open Handed".localized, action: #selector(openMainWindow), keyEquivalent: "")
         openItem.target = self
         menu.addItem(openItem)
 
         menu.addItem(NSMenuItem.separator())
 
         // Quit
-        let quitItem = NSMenuItem(title: "Quit Handed", action: #selector(quitApp), keyEquivalent: "q")
+        let quitItem = NSMenuItem(title: "Quit Handed".localized, action: #selector(quitApp), keyEquivalent: "q")
         quitItem.target = self
         menu.addItem(quitItem)
 
@@ -345,7 +363,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             DispatchQueue.main.async {
                 if error == nil {
-                    self.showNotification(title: "DNS Cache Flushed", message: "DNS cache has been cleared successfully")
+                    self.showNotification(title: "DNS Cache Flushed".localized, message: "DNS cache has been cleared successfully".localized)
                 }
             }
         }
@@ -364,9 +382,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         setupMenu() // Refresh menu to update checkmark
 
         if isMenuBarOnly {
-            showNotification(title: "Menu Bar Only", message: "Handed will now run in the menu bar only")
+            showNotification(title: "Menu Bar Only".localized, message: "Handed will now run in the menu bar only".localized)
         } else {
-            showNotification(title: "Dock Icon Enabled", message: "Handed will now show in the Dock")
+            showNotification(title: "Dock Icon Enabled".localized, message: "Handed will now show in the Dock".localized)
         }
     }
 
@@ -375,9 +393,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         setupMenu() // Refresh menu to update checkmark
 
         if launchAtStartup {
-            showNotification(title: "Launch at Startup", message: "Handed will now start automatically at login")
+            showNotification(title: "Launch at Startup".localized, message: "Handed will now start automatically at login".localized)
         } else {
-            showNotification(title: "Launch at Startup Disabled", message: "Handed will no longer start at login")
+            showNotification(title: "Launch at Startup Disabled".localized, message: "Handed will no longer start at login".localized)
         }
     }
 
@@ -419,3 +437,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         center.add(request)
     }
 }
+

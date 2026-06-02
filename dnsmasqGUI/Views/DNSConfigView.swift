@@ -16,19 +16,19 @@ struct DNSConfigView: View {
         VStack(spacing: 0) {
             // Toolbar
             HStack {
-                Text("DNS Records")
+                Text("DNS Records".localized)
                     .font(.headline)
 
                 Spacer()
 
                 if configManager.hasUnsavedChanges {
-                    Text("Unsaved Changes")
+                    Text("Unsaved Changes".localized)
                         .font(.caption)
                         .foregroundColor(.orange)
                 }
 
                 Button(action: { isAddingRecord = true }) {
-                    Label("Add Record", systemImage: "plus")
+                    Label("Add Record".localized, systemImage: "plus")
                 }
 
                 Button(action: {
@@ -37,7 +37,7 @@ struct DNSConfigView: View {
                         isEditingRecord = true
                     }
                 }) {
-                    Label("Edit", systemImage: "pencil")
+                    Label("Edit".localized, systemImage: "pencil")
                 }
                 .disabled(selectedRecord == nil)
 
@@ -50,7 +50,7 @@ struct DNSConfigView: View {
                         ProgressView()
                             .scaleEffect(0.7)
                     } else {
-                        Label("Test", systemImage: "play.circle")
+                        Label("Test".localized, systemImage: "play.circle")
                     }
                 }
                 .disabled(selectedRecord == nil || isTesting)
@@ -61,7 +61,7 @@ struct DNSConfigView: View {
                         showDeleteConfirmation = true
                     }
                 }) {
-                    Label("Delete", systemImage: "trash")
+                    Label("Delete".localized, systemImage: "trash")
                 }
                 .disabled(selectedRecord == nil)
 
@@ -73,7 +73,7 @@ struct DNSConfigView: View {
                         await configManager.saveConfig()
                     }
                 }) {
-                    Label("Save", systemImage: "square.and.arrow.down")
+                    Label("Save".localized, systemImage: "square.and.arrow.down")
                 }
                 .disabled(!configManager.hasUnsavedChanges)
 
@@ -82,7 +82,7 @@ struct DNSConfigView: View {
                         await configManager.loadConfig()
                     }
                 }) {
-                    Label("Reload", systemImage: "arrow.clockwise")
+                    Label("Reload".localized, systemImage: "arrow.clockwise")
                 }
             }
             .padding()
@@ -93,7 +93,7 @@ struct DNSConfigView: View {
             // Content
             if configManager.isLoading {
                 Spacer()
-                ProgressView("Loading configuration...")
+                ProgressView("Loading configuration...".localized)
                 Spacer()
             } else if let error = configManager.error {
                 Spacer()
@@ -103,7 +103,7 @@ struct DNSConfigView: View {
                         .foregroundColor(.red)
                     Text(error)
                         .foregroundColor(.secondary)
-                    Button("Retry") {
+                    Button("Retry".localized) {
                         Task {
                             await configManager.loadConfig()
                         }
@@ -116,12 +116,12 @@ struct DNSConfigView: View {
                     Image(systemName: "network.slash")
                         .font(.largeTitle)
                         .foregroundColor(.secondary)
-                    Text("No DNS records configured")
+                    Text("No DNS records configured".localized)
                         .foregroundColor(.secondary)
-                    Text("Add DNS overrides, upstream servers, or local-only domains")
+                    Text("Add DNS overrides, upstream servers, or local-only domains".localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    Button("Add Your First Record") {
+                    Button("Add Your First Record".localized) {
                         isAddingRecord = true
                     }
                     .buttonStyle(.borderedProminent)
@@ -138,15 +138,15 @@ struct DNSConfigView: View {
                         })
                         .tag(record)
                         .contextMenu {
-                            Button("Edit") {
+                            Button("Edit".localized) {
                                 recordToEdit = record
                                 isEditingRecord = true
                             }
-                            Button("Test Resolution") {
+                            Button("Test Resolution".localized) {
                                 testDNSRecord(record)
                             }
                             Divider()
-                            Button("Delete", role: .destructive) {
+                            Button("Delete".localized, role: .destructive) {
                                 recordToDelete = record
                                 showDeleteConfirmation = true
                             }
@@ -173,14 +173,14 @@ struct DNSConfigView: View {
                 DNSTestResultView(result: result)
             }
         }
-        .alert("Delete Record", isPresented: $showDeleteConfirmation, presenting: recordToDelete) { record in
-            Button("Cancel", role: .cancel) { }
-            Button("Delete", role: .destructive) {
+        .alert("Delete Record".localized, isPresented: $showDeleteConfirmation, presenting: recordToDelete) { record in
+            Button("Cancel".localized, role: .cancel) { }
+            Button("Delete".localized, role: .destructive) {
                 configManager.deleteDNSRecord(record)
                 selectedRecord = nil
             }
         } message: { record in
-            Text("Are you sure you want to delete the record for '\(record.domain)'?")
+            Text(String(format: "Are you sure you want to delete the record for '%@'?".localized, record.domain))
         }
     }
 
@@ -210,7 +210,7 @@ struct DNSConfigView: View {
                     record: record,
                     success: false,
                     resolvedValue: nil,
-                    message: "No response from DNS server. Is dnsmasq running?",
+                    message: "No response from DNS server. Is dnsmasq running?".localized,
                     responseTime: nil
                 )
             }
@@ -220,7 +220,7 @@ struct DNSConfigView: View {
                 record: record,
                 success: matches,
                 resolvedValue: resolvedIP,
-                message: matches ? "DNS resolution successful" : "Resolved IP doesn't match expected value",
+                message: matches ? "DNS resolution successful".localized : "Resolved IP doesn't match expected value".localized,
                 responseTime: nil
             )
         } catch {
@@ -228,7 +228,7 @@ struct DNSConfigView: View {
                 record: record,
                 success: false,
                 resolvedValue: nil,
-                message: "Test failed: \(error.localizedDescription)",
+                message: String(format: "Test failed: %@".localized, error.localizedDescription),
                 responseTime: nil
             )
         }
@@ -275,10 +275,10 @@ struct DNSTestResultView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("DNS Test Result")
+                Text("DNS Test Result".localized)
                     .font(.headline)
                 Spacer()
-                Button("Close") { dismiss() }
+                Button("Close".localized) { dismiss() }
             }
             .padding()
 
@@ -290,14 +290,14 @@ struct DNSTestResultView: View {
                     .font(.system(size: 60))
                     .foregroundColor(result.success ? .green : .red)
 
-                Text(result.success ? "Test Passed" : "Test Failed")
+                Text(result.success ? "Test Passed".localized : "Test Failed".localized)
                     .font(.title2)
                     .fontWeight(.semibold)
 
                 // Details
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
-                        Text("Domain:")
+                        Text("Domain:".localized)
                             .foregroundColor(.secondary)
                         Text(result.record.domain)
                             .fontWeight(.medium)
@@ -305,7 +305,7 @@ struct DNSTestResultView: View {
 
                     if !result.record.value.isEmpty {
                         HStack {
-                            Text("Expected:")
+                            Text("Expected:".localized)
                                 .foregroundColor(.secondary)
                             Text(result.record.value)
                                 .fontWeight(.medium)
@@ -314,7 +314,7 @@ struct DNSTestResultView: View {
 
                     if let resolved = result.resolvedValue {
                         HStack {
-                            Text("Resolved:")
+                            Text("Resolved:".localized)
                                 .foregroundColor(.secondary)
                             Text(resolved)
                                 .fontWeight(.medium)
@@ -342,7 +342,7 @@ struct DNSTestResultView: View {
 
             HStack {
                 Spacer()
-                Button("Close") { dismiss() }
+                Button("Close".localized) { dismiss() }
                     .keyboardShortcut(.return)
                     .buttonStyle(.borderedProminent)
             }
@@ -361,7 +361,7 @@ struct DNSRecordRow: View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
-                    Text(record.recordType.displayName)
+                    Text(record.recordType.displayName.localized)
                         .font(.caption)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
@@ -402,7 +402,7 @@ struct DNSRecordRow: View {
                         .foregroundColor(.green)
                 }
                 .buttonStyle(.plain)
-                .help("Test DNS resolution")
+                .help("Test DNS resolution".localized)
 
                 Button(action: onEdit) {
                     Image(systemName: "pencil.circle")
@@ -410,7 +410,7 @@ struct DNSRecordRow: View {
                         .foregroundColor(.accentColor)
                 }
                 .buttonStyle(.plain)
-                .help("Edit record")
+                .help("Edit record".localized)
             }
         }
         .padding(.vertical, 4)
@@ -483,10 +483,10 @@ struct DNSRecordEditor: View {
         VStack(spacing: 0) {
             // Header
             HStack {
-                Text(mode.isEditing ? "Edit DNS Record" : "Add DNS Record")
+                Text(mode.isEditing ? "Edit DNS Record".localized : "Add DNS Record".localized)
                     .font(.headline)
                 Spacer()
-                Button("Cancel") {
+                Button("Cancel".localized) {
                     dismiss()
                 }
             }
@@ -498,20 +498,20 @@ struct DNSRecordEditor: View {
                 VStack(alignment: .leading, spacing: 16) {
                     // Type selector
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Record Type")
+                        Text("Record Type".localized)
                             .font(.subheadline)
                             .fontWeight(.medium)
 
-                        Picker("Type", selection: $recordType) {
+                        Picker("Type".localized, selection: $recordType) {
                             ForEach(DNSRecord.RecordType.allCases, id: \.self) { type in
-                                Text(type.displayName).tag(type)
+                                Text(type.displayName.localized).tag(type)
                             }
                         }
                         .pickerStyle(.segmented)
 
                         // Type description with example
                         VStack(alignment: .leading, spacing: 4) {
-                            Text(recordType.description)
+                            Text(recordType.description.localized)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
 
@@ -531,11 +531,11 @@ struct DNSRecordEditor: View {
 
                     // Domain field
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Domain")
+                        Text("Domain".localized)
                             .font(.subheadline)
                             .fontWeight(.medium)
 
-                        TextField(placeholderDomain, text: $domain)
+                        TextField(placeholderDomain.localized, text: $domain)
                             .textFieldStyle(.roundedBorder)
 
                         Text(domainHint)
@@ -546,11 +546,11 @@ struct DNSRecordEditor: View {
                     // Value field (not for local type)
                     if recordType != .local {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text(recordType == .address ? "IP Address" : "DNS Server")
+                            Text((recordType == .address ? "IP Address" : "DNS Server").localized)
                                 .font(.subheadline)
                                 .fontWeight(.medium)
 
-                            TextField(placeholderValue, text: $value)
+                            TextField(placeholderValue.localized, text: $value)
                                 .textFieldStyle(.roundedBorder)
 
                             Text(valueHint)
@@ -561,17 +561,17 @@ struct DNSRecordEditor: View {
 
                     // Comment field
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Comment (optional)")
+                        Text("Comment (optional)".localized)
                             .font(.subheadline)
                             .fontWeight(.medium)
 
-                        TextField("Description or notes", text: $comment)
+                        TextField("Description or notes".localized, text: $comment)
                             .textFieldStyle(.roundedBorder)
                     }
 
                     // Preview
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Config Preview")
+                        Text("Config Preview".localized)
                             .font(.subheadline)
                             .fontWeight(.medium)
 
@@ -594,12 +594,12 @@ struct DNSRecordEditor: View {
             HStack {
                 Spacer()
 
-                Button("Cancel") {
+                Button("Cancel".localized) {
                     dismiss()
                 }
                 .keyboardShortcut(.escape)
 
-                Button(mode.isEditing ? "Save" : "Add Record") {
+                Button(mode.isEditing ? "Save".localized : "Add Record".localized) {
                     let id: UUID
                     if case .edit(let record) = mode {
                         id = record.id
@@ -640,20 +640,20 @@ struct DNSRecordEditor: View {
     private var domainHint: String {
         switch recordType {
         case .address:
-            return "The domain name to override (e.g., myapp.local)"
+            return "The domain name to override (e.g., myapp.local)".localized
         case .server:
-            return "Domain to route to specific DNS, or leave empty for all queries"
+            return "Domain to route to specific DNS, or leave empty for all queries".localized
         case .local:
-            return "Domain that should only be answered locally"
+            return "Domain that should only be answered locally".localized
         }
     }
 
     private var valueHint: String {
         switch recordType {
         case .address:
-            return "The IP address this domain should resolve to"
+            return "The IP address this domain should resolve to".localized
         case .server:
-            return "The DNS server IP to use for this domain"
+            return "The DNS server IP to use for this domain".localized
         case .local:
             return ""
         }
@@ -661,7 +661,7 @@ struct DNSRecordEditor: View {
 
     private var configPreview: String {
         if domain.isEmpty {
-            return "# Enter a domain to see preview"
+            return "# Enter a domain to see preview".localized
         }
 
         let record = DNSRecord(
@@ -685,3 +685,4 @@ extension DNSRecordEditor.Mode {
     DNSConfigView()
         .environmentObject(ConfigManager())
 }
+

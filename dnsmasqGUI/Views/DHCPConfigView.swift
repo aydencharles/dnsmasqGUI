@@ -42,23 +42,23 @@ struct DHCPConfigView: View {
         VStack(spacing: 0) {
             // Toolbar
             HStack {
-                Text("DHCP Configuration")
+                Text("DHCP Configuration".localized)
                     .font(.headline)
 
                 Spacer()
 
                 if configManager.hasUnsavedChanges {
-                    Text("Unsaved Changes")
+                    Text("Unsaved Changes".localized)
                         .font(.caption)
                         .foregroundColor(.orange)
                 }
 
                 Menu {
-                    Button("Add DHCP Range") { isAddingRange = true }
-                    Button("Add Static Host") { isAddingHost = true }
-                    Button("Add DHCP Option") { isAddingOption = true }
+                    Button("Add DHCP Range".localized) { isAddingRange = true }
+                    Button("Add Static Host".localized) { isAddingHost = true }
+                    Button("Add DHCP Option".localized) { isAddingOption = true }
                 } label: {
-                    Label("Add", systemImage: "plus")
+                    Label("Add".localized, systemImage: "plus")
                 }
 
                 Button(action: {
@@ -66,7 +66,7 @@ struct DHCPConfigView: View {
                         await configManager.saveConfig()
                     }
                 }) {
-                    Label("Save", systemImage: "square.and.arrow.down")
+                    Label("Save".localized, systemImage: "square.and.arrow.down")
                 }
                 .disabled(!configManager.hasUnsavedChanges)
 
@@ -75,7 +75,7 @@ struct DHCPConfigView: View {
                         await configManager.loadConfig()
                     }
                 }) {
-                    Label("Reload", systemImage: "arrow.clockwise")
+                    Label("Reload".localized, systemImage: "arrow.clockwise")
                 }
             }
             .padding()
@@ -85,9 +85,9 @@ struct DHCPConfigView: View {
 
             // Tabs
             Picker("", selection: $selectedTab) {
-                Text("Ranges (\(ranges.count))").tag(0)
-                Text("Static Hosts (\(hosts.count))").tag(1)
-                Text("Options (\(options.count))").tag(2)
+                Text(String(format: "Ranges (%d)".localized, ranges.count)).tag(0)
+                Text(String(format: "Static Hosts (%d)".localized, hosts.count)).tag(1)
+                Text(String(format: "Options (%d)".localized, options.count)).tag(2)
             }
             .pickerStyle(.segmented)
             .padding()
@@ -95,7 +95,7 @@ struct DHCPConfigView: View {
             // Content
             if configManager.isLoading {
                 Spacer()
-                ProgressView("Loading configuration...")
+                ProgressView("Loading configuration...".localized)
                 Spacer()
             } else {
                 TabView(selection: $selectedTab) {
@@ -170,13 +170,13 @@ struct DHCPConfigView: View {
                 }
             }
         }
-        .alert("Delete Entry", isPresented: $showDeleteConfirmation, presenting: leaseToDelete) { lease in
-            Button("Cancel", role: .cancel) { }
-            Button("Delete", role: .destructive) {
+        .alert("Delete Entry".localized, isPresented: $showDeleteConfirmation, presenting: leaseToDelete) { lease in
+            Button("Cancel".localized, role: .cancel) { }
+            Button("Delete".localized, role: .destructive) {
                 configManager.deleteDHCPLease(lease)
             }
         } message: { _ in
-            Text("Are you sure you want to delete this DHCP entry?")
+            Text("Are you sure you want to delete this DHCP entry?".localized)
         }
     }
 }
@@ -194,7 +194,7 @@ struct DHCPRangeList: View {
                 Image(systemName: "network.badge.shield.half.filled")
                     .font(.largeTitle)
                     .foregroundColor(.secondary)
-                Text("No DHCP ranges configured")
+                Text("No DHCP ranges configured".localized)
                     .foregroundColor(.secondary)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -206,11 +206,11 @@ struct DHCPRangeList: View {
                             onEdit(lease, range)
                         })
                         .contextMenu {
-                            Button("Edit") {
+                            Button("Edit".localized) {
                                 onEdit(lease, range)
                             }
                             Divider()
-                            Button("Delete", role: .destructive) {
+                            Button("Delete".localized, role: .destructive) {
                                 onDelete(lease)
                             }
                         }
@@ -246,7 +246,7 @@ struct DHCPRangeRow: View {
                 }
 
                 if let netmask = range.netmask {
-                    Text("Netmask: \(netmask)")
+                    Text(String(format: "Netmask: %@".localized, netmask))
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -287,7 +287,7 @@ struct DHCPHostList: View {
                 Image(systemName: "desktopcomputer")
                     .font(.largeTitle)
                     .foregroundColor(.secondary)
-                Text("No static hosts configured")
+                Text("No static hosts configured".localized)
                     .foregroundColor(.secondary)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -299,11 +299,11 @@ struct DHCPHostList: View {
                             onEdit(lease, host)
                         })
                         .contextMenu {
-                            Button("Edit") {
+                            Button("Edit".localized) {
                                 onEdit(lease, host)
                             }
                             Divider()
-                            Button("Delete", role: .destructive) {
+                            Button("Delete".localized, role: .destructive) {
                                 onDelete(lease)
                             }
                         }
@@ -384,7 +384,7 @@ struct DHCPOptionList: View {
                 Image(systemName: "slider.horizontal.3")
                     .font(.largeTitle)
                     .foregroundColor(.secondary)
-                Text("No DHCP options configured")
+                Text("No DHCP options configured".localized)
                     .foregroundColor(.secondary)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -396,11 +396,11 @@ struct DHCPOptionList: View {
                             onEdit(lease, option)
                         })
                         .contextMenu {
-                            Button("Edit") {
+                            Button("Edit".localized) {
                                 onEdit(lease, option)
                             }
                             Divider()
-                            Button("Delete", role: .destructive) {
+                            Button("Delete".localized, role: .destructive) {
                                 onDelete(lease)
                             }
                         }
@@ -420,13 +420,19 @@ struct DHCPOptionRow: View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
-                    Text(option.optionName)
-                        .font(.body)
-                        .fontWeight(.medium)
+                    if let commonName = DHCPOption.commonOptions.first(where: { $0.0 == option.optionNumber })?.1 {
+                        Text(commonName.localized)
+                            .font(.body)
+                            .fontWeight(.medium)
+                    } else {
+                        Text(String(format: "Option %d".localized, option.optionNumber))
+                            .font(.body)
+                            .fontWeight(.medium)
+                    }
 
                     Spacer()
 
-                    Text("Option \(option.optionNumber)")
+                    Text(String(format: "Option %d".localized, option.optionNumber))
                         .font(.caption)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
@@ -506,25 +512,25 @@ struct DHCPRangeEditor: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text(mode.isEditing ? "Edit DHCP Range" : "Add DHCP Range")
+                Text(mode.isEditing ? "Edit DHCP Range".localized : "Add DHCP Range".localized)
                     .font(.headline)
                 Spacer()
-                Button("Cancel") { dismiss() }
+                Button("Cancel".localized) { dismiss() }
             }
             .padding()
 
             Divider()
 
             Form {
-                TextField("Start IP", text: $startIP)
+                TextField("Start IP".localized, text: $startIP)
                     .textFieldStyle(.roundedBorder)
-                TextField("End IP", text: $endIP)
+                TextField("End IP".localized, text: $endIP)
                     .textFieldStyle(.roundedBorder)
-                TextField("Netmask (optional)", text: $netmask)
+                TextField("Netmask (optional)".localized, text: $netmask)
                     .textFieldStyle(.roundedBorder)
-                TextField("Lease Time (e.g., 12h, 1d)", text: $leaseTime)
+                TextField("Lease Time (e.g., 12h, 1d)".localized, text: $leaseTime)
                     .textFieldStyle(.roundedBorder)
-                TextField("Comment (optional)", text: $comment)
+                TextField("Comment (optional)".localized, text: $comment)
                     .textFieldStyle(.roundedBorder)
             }
             .padding()
@@ -533,9 +539,9 @@ struct DHCPRangeEditor: View {
 
             HStack {
                 Spacer()
-                Button("Cancel") { dismiss() }
+                Button("Cancel".localized) { dismiss() }
                     .keyboardShortcut(.escape)
-                Button(mode.isEditing ? "Save" : "Add") {
+                Button(mode.isEditing ? "Save".localized : "Add".localized) {
                     let range = DHCPRange(
                         startIP: startIP,
                         endIP: endIP,
@@ -598,25 +604,25 @@ struct DHCPHostEditor: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text(mode.isEditing ? "Edit Static Host" : "Add Static Host")
+                Text(mode.isEditing ? "Edit Static Host".localized : "Add Static Host".localized)
                     .font(.headline)
                 Spacer()
-                Button("Cancel") { dismiss() }
+                Button("Cancel".localized) { dismiss() }
             }
             .padding()
 
             Divider()
 
             Form {
-                TextField("MAC Address", text: $macAddress)
+                TextField("MAC Address".localized, text: $macAddress)
                     .textFieldStyle(.roundedBorder)
-                TextField("IP Address", text: $ipAddress)
+                TextField("IP Address".localized, text: $ipAddress)
                     .textFieldStyle(.roundedBorder)
-                TextField("Hostname (optional)", text: $hostname)
+                TextField("Hostname (optional)".localized, text: $hostname)
                     .textFieldStyle(.roundedBorder)
-                TextField("Lease Time (optional)", text: $leaseTime)
+                TextField("Lease Time (optional)".localized, text: $leaseTime)
                     .textFieldStyle(.roundedBorder)
-                TextField("Comment (optional)", text: $comment)
+                TextField("Comment (optional)".localized, text: $comment)
                     .textFieldStyle(.roundedBorder)
             }
             .padding()
@@ -625,9 +631,9 @@ struct DHCPHostEditor: View {
 
             HStack {
                 Spacer()
-                Button("Cancel") { dismiss() }
+                Button("Cancel".localized) { dismiss() }
                     .keyboardShortcut(.escape)
-                Button(mode.isEditing ? "Save" : "Add") {
+                Button(mode.isEditing ? "Save".localized : "Add".localized) {
                     let host = DHCPHost(
                         macAddress: macAddress,
                         ipAddress: ipAddress,
@@ -695,33 +701,33 @@ struct DHCPOptionEditor: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text(mode.isEditing ? "Edit DHCP Option" : "Add DHCP Option")
+                Text(mode.isEditing ? "Edit DHCP Option".localized : "Add DHCP Option".localized)
                     .font(.headline)
                 Spacer()
-                Button("Cancel") { dismiss() }
+                Button("Cancel".localized) { dismiss() }
             }
             .padding()
 
             Divider()
 
             Form {
-                Toggle("Use Custom Option Number", isOn: $useCustomOption)
+                Toggle("Use Custom Option Number".localized, isOn: $useCustomOption)
 
                 if useCustomOption {
-                    TextField("Option Number", text: $customOption)
+                    TextField("Option Number".localized, text: $customOption)
                         .textFieldStyle(.roundedBorder)
                 } else {
-                    Picker("Option", selection: $selectedOption) {
+                    Picker("Option".localized, selection: $selectedOption) {
                         ForEach(DHCPOption.commonOptions, id: \.0) { option in
-                            Text("\(option.0) - \(option.1)").tag(option.0)
+                            Text(String(format: "%d - %@", option.0, option.1.localized)).tag(option.0)
                         }
                     }
                 }
 
-                TextField("Value", text: $value)
+                TextField("Value".localized, text: $value)
                     .textFieldStyle(.roundedBorder)
 
-                TextField("Comment (optional)", text: $comment)
+                TextField("Comment (optional)".localized, text: $comment)
                     .textFieldStyle(.roundedBorder)
             }
             .padding()
@@ -730,9 +736,9 @@ struct DHCPOptionEditor: View {
 
             HStack {
                 Spacer()
-                Button("Cancel") { dismiss() }
+                Button("Cancel".localized) { dismiss() }
                     .keyboardShortcut(.escape)
-                Button(mode.isEditing ? "Save" : "Add") {
+                Button(mode.isEditing ? "Save".localized : "Add".localized) {
                     let option = DHCPOption(
                         optionNumber: optionNumber,
                         value: value,
@@ -755,3 +761,4 @@ struct DHCPOptionEditor: View {
     DHCPConfigView()
         .environmentObject(ConfigManager())
 }
+

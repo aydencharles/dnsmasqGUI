@@ -20,16 +20,18 @@ struct SettingsView: View {
     @AppStorage("launchAtStartup") private var launchAtStartup = false
     @AppStorage("appearanceMode") private var appearanceMode: String = AppearanceMode.system.rawValue
     @State private var showingRestartAlert = false
+    
+    @EnvironmentObject var languageManager: LanguageManager
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 // Header
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Settings")
+                    Text("Settings".localized)
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                    Text("Configure Handed preferences")
+                    Text("Configure Handed preferences".localized)
                         .foregroundColor(.secondary)
                 }
                 .padding(.bottom, 8)
@@ -39,9 +41,9 @@ struct SettingsView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         Toggle(isOn: $launchAtStartup) {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("Launch at Startup")
+                                Text("Launch at Startup".localized)
                                     .fontWeight(.medium)
-                                Text("Automatically start Handed when you log in")
+                                Text("Automatically start Handed when you log in".localized)
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
@@ -54,9 +56,9 @@ struct SettingsView: View {
 
                         Toggle(isOn: $menuBarOnly) {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("Menu Bar Only")
+                                Text("Menu Bar Only".localized)
                                     .fontWeight(.medium)
-                                Text("Hide the Dock icon and run only in the menu bar")
+                                Text("Hide the Dock icon and run only in the menu bar".localized)
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
@@ -68,18 +70,18 @@ struct SettingsView: View {
                     }
                     .padding(4)
                 } label: {
-                    Label("Startup", systemImage: "power")
+                    Label("Startup".localized, systemImage: "power")
                 }
 
                 // Appearance Section
                 GroupBox {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Theme")
+                        Text("Theme".localized)
                             .fontWeight(.medium)
 
-                        Picker("Appearance", selection: $appearanceMode) {
+                        Picker("Appearance".localized, selection: $appearanceMode) {
                             ForEach(AppearanceMode.allCases, id: \.rawValue) { mode in
-                                Label(mode.rawValue, systemImage: mode.icon)
+                                Label(mode.rawValue.localized, systemImage: mode.icon)
                                     .tag(mode.rawValue)
                             }
                         }
@@ -88,13 +90,36 @@ struct SettingsView: View {
                             updateAppearance(mode: AppearanceMode(rawValue: newValue) ?? .system)
                         }
 
-                        Text("Choose how Handed appears. Select System to automatically match your Mac's appearance.")
+                        Text("Choose how Handed appears. Select System to automatically match your Mac's appearance.".localized)
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
                     .padding(4)
                 } label: {
-                    Label("Appearance", systemImage: "paintbrush.fill")
+                    Label("Appearance".localized, systemImage: "paintbrush.fill")
+                }
+
+                // Language Section
+                GroupBox {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Language".localized)
+                            .fontWeight(.medium)
+
+                        Picker("Language".localized, selection: $languageManager.selectedLanguage) {
+                            ForEach(LanguageManager.Language.allCases) { lang in
+                                Text(lang.nativeName)
+                                    .tag(lang.rawValue)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+
+                        Text("Choose the application language.".localized)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(4)
+                } label: {
+                    Label("Language".localized, systemImage: "globe")
                 }
 
                 // Menu Bar Section
@@ -106,25 +131,25 @@ struct SettingsView: View {
                                 .foregroundColor(.accentColor)
 
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("Menu Bar Access")
+                                Text("Menu Bar Access".localized)
                                     .fontWeight(.medium)
-                                Text("Handed always shows in the menu bar for quick access to start/stop dnsmasq, flush DNS cache, and check status.")
+                                Text("Handed always shows in the menu bar for quick access to start/stop dnsmasq, flush DNS cache, and check status.".localized)
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
                         }
 
                         HStack(spacing: 16) {
-                            StatusIndicator(color: .green, label: "Running")
-                            StatusIndicator(color: .gray, label: "Stopped")
-                            StatusIndicator(color: .red, label: "Error")
-                            StatusIndicator(color: .orange, label: "Unknown")
+                            StatusIndicator(color: .green, label: "Running".localized)
+                            StatusIndicator(color: .gray, label: "Stopped".localized)
+                            StatusIndicator(color: .red, label: "Error".localized)
+                            StatusIndicator(color: .orange, label: "Unknown".localized)
                         }
                         .padding(.top, 4)
                     }
                     .padding(4)
                 } label: {
-                    Label("Menu Bar", systemImage: "hand.raised.fill")
+                    Label("Menu Bar".localized, systemImage: "hand.raised.fill")
                 }
 
                 // About Section
@@ -150,10 +175,10 @@ struct SettingsView: View {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text("Handed")
                                     .font(.headline)
-                                Text("Version \(AppInfo.version)")
+                                Text(String(format: "Version %@".localized, AppInfo.version))
                                     .font(.caption)
                                     .foregroundColor(.secondary)
-                                Text("A native macOS GUI for dnsmasq")
+                                Text("A native macOS GUI for dnsmasq".localized)
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
@@ -165,18 +190,18 @@ struct SettingsView: View {
 
                         HStack(spacing: 16) {
                             Link(destination: URL(string: "https://github.com/thejustinjames/handed")!) {
-                                Label("GitHub", systemImage: "link")
+                                Label("GitHub".localized, systemImage: "link")
                             }
 
                             Link(destination: URL(string: "https://github.com/thejustinjames/handed/issues")!) {
-                                Label("Report Issue", systemImage: "exclamationmark.bubble")
+                                Label("Report Issue".localized, systemImage: "exclamationmark.bubble")
                             }
                         }
                         .font(.caption)
                     }
                     .padding(4)
                 } label: {
-                    Label("About", systemImage: "info.circle")
+                    Label("About".localized, systemImage: "info.circle")
                 }
 
                 Spacer()
@@ -184,10 +209,10 @@ struct SettingsView: View {
             .padding(24)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .alert("Restart Required", isPresented: $showingRestartAlert) {
-            Button("OK") { }
+        .alert("Restart Required".localized, isPresented: $showingRestartAlert) {
+            Button("OK".localized) { }
         } message: {
-            Text("The Dock icon change will take full effect after restarting Handed.")
+            Text("The Dock icon change will take full effect after restarting Handed.".localized)
         }
     }
 
@@ -241,4 +266,6 @@ struct StatusIndicator: View {
 
 #Preview {
     SettingsView()
+        .environmentObject(LanguageManager.shared)
 }
+

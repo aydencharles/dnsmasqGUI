@@ -14,7 +14,7 @@ struct LogViewerView: View {
         VStack(spacing: 0) {
             // Toolbar
             HStack {
-                Text("Log Viewer")
+                Text("Log Viewer".localized)
                     .font(.headline)
 
                 Spacer()
@@ -24,7 +24,7 @@ struct LogViewerView: View {
                     Circle()
                         .fill(logReader.isMonitoring ? Color.green : Color.gray)
                         .frame(width: 8, height: 8)
-                    Text(logReader.isMonitoring ? "Monitoring" : "Stopped")
+                    Text(logReader.isMonitoring ? "Monitoring".localized : "Stopped".localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -32,7 +32,7 @@ struct LogViewerView: View {
                 Divider()
                     .frame(height: 20)
 
-                Toggle("Auto-scroll", isOn: $autoScroll)
+                Toggle("Auto-scroll".localized, isOn: $autoScroll)
                     .toggleStyle(.checkbox)
 
                 Button(action: {
@@ -43,7 +43,7 @@ struct LogViewerView: View {
                     }
                 }) {
                     Label(
-                        logReader.isMonitoring ? "Stop" : "Start",
+                        logReader.isMonitoring ? "Stop".localized : "Start".localized,
                         systemImage: logReader.isMonitoring ? "pause.fill" : "play.fill"
                     )
                 }
@@ -51,13 +51,13 @@ struct LogViewerView: View {
                 Button(action: {
                     logReader.clearLogs()
                 }) {
-                    Label("Clear", systemImage: "trash")
+                    Label("Clear".localized, systemImage: "trash")
                 }
 
                 Button(action: {
                     showExportDialog = true
                 }) {
-                    Label("Export", systemImage: "square.and.arrow.up")
+                    Label("Export".localized, systemImage: "square.and.arrow.up")
                 }
                 .disabled(logReader.logLines.isEmpty)
             }
@@ -70,7 +70,7 @@ struct LogViewerView: View {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.secondary)
-                TextField("Filter logs...", text: $searchText)
+                TextField("Filter logs...".localized, text: $searchText)
                     .textFieldStyle(.plain)
                 if !searchText.isEmpty {
                     Button(action: { searchText = "" }) {
@@ -94,7 +94,7 @@ struct LogViewerView: View {
                     Text(error)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
-                    Button("Retry") {
+                    Button("Retry".localized) {
                         logReader.startMonitoring()
                     }
                 }
@@ -105,15 +105,15 @@ struct LogViewerView: View {
                         .font(.largeTitle)
                         .foregroundColor(.secondary)
                     if searchText.isEmpty {
-                        Text("No log entries yet")
+                        Text("No log entries yet".localized)
                             .foregroundColor(.secondary)
                         if !logReader.isMonitoring {
-                            Button("Start Monitoring") {
+                            Button("Start Monitoring".localized) {
                                 logReader.startMonitoring()
                             }
                         }
                     } else {
-                        Text("No matching log entries")
+                        Text("No matching log entries".localized)
                             .foregroundColor(.secondary)
                     }
                 }
@@ -144,12 +144,12 @@ struct LogViewerView: View {
 
             // Footer stats
             HStack {
-                Text("\(filteredLogs.count) entries")
+                Text(String(format: "%d entries".localized, filteredLogs.count))
                     .font(.caption)
                     .foregroundColor(.secondary)
 
                 if !searchText.isEmpty {
-                    Text("(filtered from \(logReader.logLines.count))")
+                    Text(String(format: "(filtered from %d)".localized, logReader.logLines.count))
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -157,7 +157,7 @@ struct LogViewerView: View {
                 Spacer()
 
                 if logReader.isMonitoring {
-                    Text("Last updated: \(formattedTime)")
+                    Text(String(format: "Last updated: %@".localized, formattedTime))
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }

@@ -17,7 +17,7 @@ struct BackupRestoreView: View {
         VStack(spacing: 0) {
             // Header
             HStack {
-                Text("Backup & Restore")
+                Text("Backup & Restore".localized)
                     .font(.headline)
                 Spacer()
             }
@@ -31,13 +31,13 @@ struct BackupRestoreView: View {
                     // Backup Section
                     SectionCard(title: "Backup Configuration", icon: "arrow.down.doc", color: .blue) {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Save your current dnsmasq configuration and resolver files to a backup folder.")
+                            Text("Save your current dnsmasq configuration and resolver files to a backup folder.".localized)
                                 .font(.callout)
                                 .foregroundColor(.secondary)
 
                             HStack {
                                 Button(action: { Task { await performBackup() } }) {
-                                    Label("Create Backup", systemImage: "square.and.arrow.down")
+                                    Label("Create Backup".localized, systemImage: "square.and.arrow.down")
                                 }
                                 .buttonStyle(.borderedProminent)
                                 .disabled(isProcessing)
@@ -48,7 +48,7 @@ struct BackupRestoreView: View {
                                 }
                             }
 
-                            Text("Backs up: dnsmasq.conf + /etc/resolver/* files")
+                            Text("Backs up: dnsmasq.conf + /etc/resolver/* files".localized)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -57,16 +57,16 @@ struct BackupRestoreView: View {
                     // Restore Section
                     SectionCard(title: "Restore Configuration", icon: "arrow.up.doc", color: .orange) {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Restore a previous backup of your dnsmasq configuration.")
+                            Text("Restore a previous backup of your dnsmasq configuration.".localized)
                                 .font(.callout)
                                 .foregroundColor(.secondary)
 
                             Button(action: { Task { await performRestore() } }) {
-                                Label("Restore from Backup", systemImage: "arrow.counterclockwise")
+                                Label("Restore from Backup".localized, systemImage: "arrow.counterclockwise")
                             }
                             .disabled(isProcessing)
 
-                            Text("Select a backup folder created by Handed")
+                            Text("Select a backup folder created by Handed".localized)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -75,22 +75,22 @@ struct BackupRestoreView: View {
                     // Import Section
                     SectionCard(title: "Import from Hosts Format", icon: "doc.text", color: .green) {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Import DNS entries from /etc/hosts format or paste entries directly.")
+                            Text("Import DNS entries from /etc/hosts format or paste entries directly.".localized)
                                 .font(.callout)
                                 .foregroundColor(.secondary)
 
                             HStack {
                                 Button(action: { Task { await importFromHostsFile() } }) {
-                                    Label("Import /etc/hosts", systemImage: "doc.badge.arrow.up")
+                                    Label("Import /etc/hosts".localized, systemImage: "doc.badge.arrow.up")
                                 }
 
                                 Button(action: { showImportSheet = true }) {
-                                    Label("Paste Entries", systemImage: "doc.on.clipboard")
+                                    Label("Paste Entries".localized, systemImage: "doc.on.clipboard")
                                 }
                             }
                             .disabled(isProcessing)
 
-                            Text("Format: IP_ADDRESS HOSTNAME (e.g., 127.0.0.1 myapp.local)")
+                            Text("Format: IP_ADDRESS HOSTNAME (e.g., 127.0.0.1 myapp.local)".localized)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -99,17 +99,17 @@ struct BackupRestoreView: View {
                     // Export Section
                     SectionCard(title: "Export Configuration", icon: "square.and.arrow.up", color: .purple) {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Export your DNS records to various formats for sharing or documentation.")
+                            Text("Export your DNS records to various formats for sharing or documentation.".localized)
                                 .font(.callout)
                                 .foregroundColor(.secondary)
 
                             HStack {
                                 Button(action: { Task { await exportAsHosts() } }) {
-                                    Label("Export as Hosts", systemImage: "doc.text")
+                                    Label("Export as Hosts".localized, systemImage: "doc.text")
                                 }
 
                                 Button(action: { Task { await exportAsDnsmasqConf() } }) {
-                                    Label("Export dnsmasq.conf", systemImage: "doc.badge.gearshape")
+                                    Label("Export dnsmasq.conf".localized, systemImage: "doc.badge.gearshape")
                                 }
                             }
                             .disabled(isProcessing)
@@ -119,11 +119,11 @@ struct BackupRestoreView: View {
                     // Quick TLD Presets Section
                     SectionCard(title: "Quick TLD Presets", icon: "wand.and.stars", color: .pink) {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("One-click setup for common local development TLDs. Creates resolver files pointing to 127.0.0.1.")
+                            Text("One-click setup for common local development TLDs. Creates resolver files pointing to 127.0.0.1.".localized)
                                 .font(.callout)
                                 .foregroundColor(.secondary)
 
-                            Text("Local Development")
+                            Text("Local Development".localized)
                                 .font(.caption)
                                 .fontWeight(.medium)
                                 .foregroundColor(.secondary)
@@ -151,7 +151,7 @@ struct BackupRestoreView: View {
 
                             Divider()
 
-                            Text("Kubernetes / Cloud")
+                            Text("Kubernetes / Cloud".localized)
                                 .font(.caption)
                                 .fontWeight(.medium)
                                 .foregroundColor(.secondary)
@@ -170,7 +170,7 @@ struct BackupRestoreView: View {
                     // AWS Emulation Section
                     SectionCard(title: "AWS Local Emulation", icon: "cloud", color: .orange) {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Route AWS service domains to localhost for local development with LocalStack, ElasticMQ, etc.")
+                            Text("Route AWS service domains to localhost for local development with LocalStack, ElasticMQ, etc.".localized)
                                 .font(.callout)
                                 .foregroundColor(.secondary)
 
@@ -197,10 +197,10 @@ struct BackupRestoreView: View {
                                 Image(systemName: "exclamationmark.triangle.fill")
                                     .foregroundColor(.orange)
                                 VStack(alignment: .leading, spacing: 4) {
-                                    Text("Important: DNS alone is not enough for AWS SDK services")
+                                    Text("Important: DNS alone is not enough for AWS SDK services".localized)
                                         .font(.caption)
                                         .fontWeight(.medium)
-                                    Text("You also need endpoint configuration in your app:")
+                                    Text("You also need endpoint configuration in your app:".localized)
                                         .font(.caption2)
                                         .foregroundColor(.secondary)
                                     Text("AWS_ENDPOINT_URL=http://localhost:4566\nCOGNITO_ENDPOINT=http://localhost:9229")
@@ -219,15 +219,15 @@ struct BackupRestoreView: View {
                     // Custom Domain Section
                     SectionCard(title: "Custom Domain", icon: "plus.circle", color: .gray) {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Create a resolver for any custom domain.")
+                            Text("Create a resolver for any custom domain.".localized)
                                 .font(.callout)
                                 .foregroundColor(.secondary)
 
                             HStack {
-                                TextField("Domain (e.g., mycompany.cloud)", text: $customDomain)
+                                TextField("Domain (e.g., mycompany.cloud)".localized, text: $customDomain)
                                     .textFieldStyle(.roundedBorder)
 
-                                Button("Create") {
+                                Button("Create".localized) {
                                     Task {
                                         await setupTLDPreset(customDomain)
                                         customDomain = ""
@@ -236,7 +236,7 @@ struct BackupRestoreView: View {
                                 .disabled(customDomain.trimmingCharacters(in: .whitespaces).isEmpty || isProcessing)
                             }
 
-                            Text("Creates /etc/resolver/\(customDomain.isEmpty ? "domain" : customDomain) → 127.0.0.1")
+                            Text(String(format: "Creates /etc/resolver/%@ → 127.0.0.1".localized, customDomain.isEmpty ? "domain" : customDomain))
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -253,7 +253,7 @@ struct BackupRestoreView: View {
                     Text(statusMessage)
                         .font(.callout)
                     Spacer()
-                    Button("Dismiss") {
+                    Button("Dismiss".localized) {
                         withAnimation { showStatus = false }
                     }
                     .buttonStyle(.plain)
@@ -279,7 +279,7 @@ struct BackupRestoreView: View {
         isProcessing = true
 
         let panel = NSSavePanel()
-        panel.title = "Choose Backup Location"
+        panel.title = "Choose Backup Location".localized
         panel.nameFieldStringValue = "handed-backup-\(dateString())"
         panel.canCreateDirectories = true
 
@@ -317,9 +317,9 @@ struct BackupRestoreView: View {
                 let metadataData = try JSONSerialization.data(withJSONObject: metadata, options: .prettyPrinted)
                 try metadataData.write(to: url.appendingPathComponent("backup-info.json"))
 
-                showStatusMessage("Backup created successfully at \(url.lastPathComponent)", success: true)
+                showStatusMessage(String(format: "Backup created successfully at %@".localized, url.lastPathComponent), success: true)
             } catch {
-                showStatusMessage("Backup failed: \(error.localizedDescription)", success: false)
+                showStatusMessage(String(format: "Backup failed: %@".localized, error.localizedDescription), success: false)
             }
         }
 
@@ -330,7 +330,7 @@ struct BackupRestoreView: View {
         isProcessing = true
 
         let panel = NSOpenPanel()
-        panel.title = "Select Backup Folder"
+        panel.title = "Select Backup Folder".localized
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
 
@@ -341,7 +341,7 @@ struct BackupRestoreView: View {
                 // Check for valid backup
                 let metadataURL = url.appendingPathComponent("backup-info.json")
                 guard FileManager.default.fileExists(atPath: metadataURL.path) else {
-                    throw RestoreError.invalidBackup("Not a valid Handed backup folder")
+                    throw RestoreError.invalidBackup("Not a valid Handed backup folder".localized)
                 }
 
                 // Restore dnsmasq.conf
@@ -365,9 +365,9 @@ struct BackupRestoreView: View {
                 await configManager.loadConfig()
                 await resolverManager.loadResolverFiles()
 
-                showStatusMessage("Configuration restored successfully", success: true)
+                showStatusMessage("Configuration restored successfully".localized, success: true)
             } catch {
-                showStatusMessage("Restore failed: \(error.localizedDescription)", success: false)
+                showStatusMessage(String(format: "Restore failed: %@".localized, error.localizedDescription), success: false)
             }
         }
 
@@ -382,15 +382,15 @@ struct BackupRestoreView: View {
             let entries = parseHostsFormat(content)
 
             if entries.isEmpty {
-                showStatusMessage("No valid entries found in /etc/hosts", success: false)
+                showStatusMessage("No valid entries found in /etc/hosts".localized, success: false)
             } else {
                 for entry in entries {
                     configManager.addDNSRecord(entry)
                 }
-                showStatusMessage("Imported \(entries.count) entries from /etc/hosts", success: true)
+                showStatusMessage(String(format: "Imported %d entries from /etc/hosts".localized, entries.count), success: true)
             }
         } catch {
-            showStatusMessage("Failed to read /etc/hosts: \(error.localizedDescription)", success: false)
+            showStatusMessage(String(format: "Failed to read /etc/hosts: %@".localized, error.localizedDescription), success: false)
         }
 
         isProcessing = false
@@ -402,12 +402,12 @@ struct BackupRestoreView: View {
         let entries = parseHostsFormat(text)
 
         if entries.isEmpty {
-            showStatusMessage("No valid entries found", success: false)
+            showStatusMessage("No valid entries found".localized, success: false)
         } else {
             for entry in entries {
                 configManager.addDNSRecord(entry)
             }
-            showStatusMessage("Imported \(entries.count) entries", success: true)
+            showStatusMessage(String(format: "Imported %d entries".localized, entries.count), success: true)
         }
 
         isProcessing = false
@@ -417,7 +417,7 @@ struct BackupRestoreView: View {
         isProcessing = true
 
         let panel = NSSavePanel()
-        panel.title = "Export as Hosts File"
+        panel.title = "Export as Hosts File".localized
         panel.nameFieldStringValue = "hosts-export.txt"
 
         let response = await panel.beginSheetModal(for: NSApp.keyWindow!)
@@ -436,9 +436,9 @@ struct BackupRestoreView: View {
 
             do {
                 try content.write(to: url, atomically: true, encoding: .utf8)
-                showStatusMessage("Exported to \(url.lastPathComponent)", success: true)
+                showStatusMessage(String(format: "Exported to %@".localized, url.lastPathComponent), success: true)
             } catch {
-                showStatusMessage("Export failed: \(error.localizedDescription)", success: false)
+                showStatusMessage(String(format: "Export failed: %@".localized, error.localizedDescription), success: false)
             }
         }
 
@@ -449,7 +449,7 @@ struct BackupRestoreView: View {
         isProcessing = true
 
         let panel = NSSavePanel()
-        panel.title = "Export dnsmasq.conf"
+        panel.title = "Export dnsmasq.conf".localized
         panel.nameFieldStringValue = "dnsmasq-export.conf"
 
         let response = await panel.beginSheetModal(for: NSApp.keyWindow!)
@@ -458,9 +458,9 @@ struct BackupRestoreView: View {
             do {
                 let content = configManager.config.toConfigString()
                 try content.write(to: url, atomically: true, encoding: .utf8)
-                showStatusMessage("Exported to \(url.lastPathComponent)", success: true)
+                showStatusMessage(String(format: "Exported to %@".localized, url.lastPathComponent), success: true)
             } catch {
-                showStatusMessage("Export failed: \(error.localizedDescription)", success: false)
+                showStatusMessage(String(format: "Export failed: %@".localized, error.localizedDescription), success: false)
             }
         }
 
@@ -475,15 +475,15 @@ struct BackupRestoreView: View {
             let resolverFile = ResolverFile(
                 domain: tld,
                 nameservers: ["127.0.0.1"],
-                comment: "Created by Handed for *.\(tld) domains"
+                comment: String(format: "Created by Handed for *.%@ domains".localized, tld)
             )
 
             let success = await resolverManager.saveResolverFile(resolverFile)
 
             if success {
-                showStatusMessage("Created resolver for *.\(tld) → 127.0.0.1", success: true)
+                showStatusMessage(String(format: "Created resolver for *.%@ → 127.0.0.1".localized, tld), success: true)
             } else {
-                showStatusMessage("Failed to create resolver for .\(tld)", success: false)
+                showStatusMessage(String(format: "Failed to create resolver for .%@".localized, tld), success: false)
             }
         }
 
@@ -522,7 +522,7 @@ struct BackupRestoreView: View {
                     recordType: .address,
                     domain: hostname,
                     value: ip,
-                    comment: "Imported from hosts"
+                    comment: "Imported from hosts".localized
                 )
                 records.append(record)
             }
@@ -558,7 +558,7 @@ struct BackupRestoreView: View {
                 let result = appleScript?.executeAndReturnError(&error)
 
                 if let error = error {
-                    let message = error[NSAppleScript.errorMessage] as? String ?? "Unknown error"
+                    let message = error[NSAppleScript.errorMessage] as? String ?? "Unknown error".localized
                     continuation.resume(throwing: RestoreError.scriptError(message))
                 } else {
                     continuation.resume(returning: result?.stringValue ?? "")
@@ -591,7 +591,7 @@ struct BackupRestoreView: View {
         var errorDescription: String? {
             switch self {
             case .invalidBackup(let message): return message
-            case .scriptError(let message): return "Script error: \(message)"
+            case .scriptError(let message): return String(format: "Script error: %@".localized, message)
             }
         }
     }
@@ -610,7 +610,7 @@ struct SectionCard<Content: View>: View {
             HStack {
                 Image(systemName: icon)
                     .foregroundColor(color)
-                Text(title)
+                Text(title.localized)
                     .font(.headline)
             }
 
@@ -648,7 +648,7 @@ struct PresetButton: View {
                     Text(".\(tld)")
                         .font(.headline)
                 }
-                Text(description)
+                Text(description.localized)
                     .font(.caption2)
                     .foregroundColor(.secondary)
             }
@@ -668,17 +668,17 @@ struct ImportSheet: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("Import DNS Entries")
+                Text("Import DNS Entries".localized)
                     .font(.headline)
                 Spacer()
-                Button("Cancel") { dismiss() }
+                Button("Cancel".localized) { dismiss() }
             }
             .padding()
 
             Divider()
 
             VStack(alignment: .leading, spacing: 12) {
-                Text("Paste entries in hosts file format (IP ADDRESS followed by HOSTNAME):")
+                Text("Paste entries in hosts file format (IP ADDRESS followed by HOSTNAME):".localized)
                     .font(.callout)
                     .foregroundColor(.secondary)
 
@@ -687,7 +687,7 @@ struct ImportSheet: View {
                     .frame(minHeight: 200)
                     .border(Color(NSColor.separatorColor), width: 1)
 
-                Text("Example:\n127.0.0.1 myapp.local\n192.168.1.100 database.internal api.internal")
+                Text("Example:\n127.0.0.1 myapp.local\n192.168.1.100 database.internal api.internal".localized)
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -697,8 +697,8 @@ struct ImportSheet: View {
 
             HStack {
                 Spacer()
-                Button("Cancel") { dismiss() }
-                Button("Import") {
+                Button("Cancel".localized) { dismiss() }
+                Button("Import".localized) {
                     onImport(importText)
                     dismiss()
                 }

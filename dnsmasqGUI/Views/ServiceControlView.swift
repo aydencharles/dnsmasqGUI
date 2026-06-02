@@ -13,22 +13,22 @@ struct ServiceControlView: View {
                 // Mode Selection Card
                 VStack(spacing: 16) {
                     HStack {
-                        Text("Execution Mode")
+                        Text("Execution Mode".localized)
                             .font(.headline)
                         Spacer()
                         Button(action: { showSettings.toggle() }) {
-                            Label("Settings", systemImage: "gear")
+                            Label("Settings".localized, systemImage: "gear")
                         }
                     }
 
-                    Picker("Mode", selection: $dnsmasqService.mode) {
+                    Picker("Mode".localized, selection: $dnsmasqService.mode) {
                         ForEach(DnsmasqMode.allCases) { mode in
-                            Text(mode.rawValue).tag(mode)
+                            Text(mode.rawValue.localized).tag(mode)
                         }
                     }
                     .pickerStyle(.segmented)
 
-                    Text(dnsmasqService.mode.description)
+                    Text(dnsmasqService.mode.description.localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -47,20 +47,20 @@ struct ServiceControlView: View {
                             .foregroundColor(statusColor)
 
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("dnsmasq Service")
+                            Text("dnsmasq Service".localized)
                                 .font(.headline)
 
-                            Text(dnsmasqService.status.state.rawValue)
+                            Text(dnsmasqService.status.state.rawValue.localized)
                                 .font(.title2)
                                 .foregroundColor(statusColor)
 
                             if let pid = dnsmasqService.status.pid {
-                                Text("PID: \(pid)")
+                                Text(String(format: "PID: %d".localized, pid))
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
 
-                            Text("Mode: \(dnsmasqService.mode.rawValue)")
+                            Text(String(format: "Mode: %@".localized, dnsmasqService.mode.rawValue.localized))
                                 .font(.caption)
                                 .foregroundColor(.secondary)
 
@@ -83,7 +83,7 @@ struct ServiceControlView: View {
                                 .font(.title2)
                         }
                         .buttonStyle(.borderless)
-                        .help("Refresh Status")
+                        .help("Refresh Status".localized)
                     }
                     .padding()
                     .background(
@@ -98,7 +98,7 @@ struct ServiceControlView: View {
                                 await dnsmasqService.start()
                             }
                         }) {
-                            Label("Start", systemImage: "play.fill")
+                            Label("Start".localized, systemImage: "play.fill")
                                 .frame(maxWidth: .infinity)
                         }
                         .buttonStyle(.borderedProminent)
@@ -110,7 +110,7 @@ struct ServiceControlView: View {
                                 await dnsmasqService.stop()
                             }
                         }) {
-                            Label("Stop", systemImage: "stop.fill")
+                            Label("Stop".localized, systemImage: "stop.fill")
                                 .frame(maxWidth: .infinity)
                         }
                         .buttonStyle(.borderedProminent)
@@ -122,7 +122,7 @@ struct ServiceControlView: View {
                                 await dnsmasqService.restart()
                             }
                         }) {
-                            Label("Restart", systemImage: "arrow.clockwise")
+                            Label("Restart".localized, systemImage: "arrow.clockwise")
                                 .frame(maxWidth: .infinity)
                         }
                         .buttonStyle(.borderedProminent)
@@ -143,7 +143,7 @@ struct ServiceControlView: View {
 
                 // Quick Actions
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Quick Actions")
+                    Text("Quick Actions".localized)
                         .font(.headline)
 
                     HStack(spacing: 12) {
@@ -152,7 +152,7 @@ struct ServiceControlView: View {
                                 await dnsmasqService.checkStatus()
                             }
                         }) {
-                            Label("Refresh Status", systemImage: "arrow.clockwise")
+                            Label("Refresh Status".localized, systemImage: "arrow.clockwise")
                         }
 
                         Button(action: {
@@ -161,7 +161,7 @@ struct ServiceControlView: View {
                                 showValidationAlert = true
                             }
                         }) {
-                            Label("Validate Config", systemImage: "checkmark.shield")
+                            Label("Validate Config".localized, systemImage: "checkmark.shield")
                         }
 
                         if configManager.hasUnsavedChanges {
@@ -172,7 +172,7 @@ struct ServiceControlView: View {
                                     }
                                 }
                             }) {
-                                Label("Save & Restart", systemImage: "arrow.triangle.2.circlepath")
+                                Label("Save & Restart".localized, systemImage: "arrow.triangle.2.circlepath")
                             }
                             .buttonStyle(.borderedProminent)
                         }
@@ -187,12 +187,12 @@ struct ServiceControlView: View {
 
                 // Paths Info
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Paths")
+                    Text("Paths".localized)
                         .font(.headline)
 
                     VStack(alignment: .leading, spacing: 4) {
                         HStack {
-                            Text("dnsmasq binary:")
+                            Text("dnsmasq binary:".localized)
                                 .foregroundColor(.secondary)
                             Text(dnsmasqService.dnsmasqPath)
                                 .font(.system(.body, design: .monospaced))
@@ -207,7 +207,7 @@ struct ServiceControlView: View {
                         }
 
                         HStack {
-                            Text("Config file:")
+                            Text("Config file:".localized)
                                 .foregroundColor(.secondary)
                             Text(dnsmasqService.configPath)
                                 .font(.system(.body, design: .monospaced))
@@ -231,11 +231,11 @@ struct ServiceControlView: View {
 
                 // Output Log
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Output")
+                    Text("Output".localized)
                         .font(.headline)
 
                     ScrollView {
-                        Text(dnsmasqService.lastOutput.isEmpty ? "No output" : dnsmasqService.lastOutput)
+                        Text(dnsmasqService.lastOutput.isEmpty ? "No output".localized : dnsmasqService.lastOutput)
                             .font(.system(.body, design: .monospaced))
                             .foregroundColor(dnsmasqService.lastOutput.isEmpty ? .secondary : .primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -261,13 +261,13 @@ struct ServiceControlView: View {
         .sheet(isPresented: $showSettings) {
             ServiceSettingsView()
         }
-        .alert("Configuration Validation", isPresented: $showValidationAlert, presenting: validationResult) { _ in
-            Button("OK", role: .cancel) { }
+        .alert("Configuration Validation".localized, isPresented: $showValidationAlert, presenting: validationResult) { _ in
+            Button("OK".localized, role: .cancel) { }
         } message: { result in
             if result.valid {
-                Text("Configuration is valid and ready to use.")
+                Text("Configuration is valid and ready to use.".localized)
             } else {
-                Text("Validation failed: \(result.message)")
+                Text(String(format: "Validation failed: %@".localized, result.message))
             }
         }
     }
@@ -292,40 +292,40 @@ struct ServiceSettingsView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("Service Settings")
+                Text("Service Settings".localized)
                     .font(.headline)
                 Spacer()
-                Button("Done") { dismiss() }
+                Button("Done".localized) { dismiss() }
             }
             .padding()
 
             Divider()
 
             Form {
-                Section("Paths") {
+                Section("Paths".localized) {
                     HStack {
-                        TextField("dnsmasq Binary Path", text: $dnsmasqPath)
+                        TextField("dnsmasq Binary Path".localized, text: $dnsmasqPath)
                             .textFieldStyle(.roundedBorder)
-                        Button("Browse") {
+                        Button("Browse".localized) {
                             browsePath(for: .binary)
                         }
                     }
 
                     HStack {
-                        TextField("Config File Path", text: $configPath)
+                        TextField("Config File Path".localized, text: $configPath)
                             .textFieldStyle(.roundedBorder)
-                        Button("Browse") {
+                        Button("Browse".localized) {
                             browsePath(for: .config)
                         }
                     }
                 }
 
-                Section("Execution Mode") {
-                    Picker("Mode", selection: $dnsmasqService.mode) {
+                Section("Execution Mode".localized) {
+                    Picker("Mode".localized, selection: $dnsmasqService.mode) {
                         ForEach(DnsmasqMode.allCases) { mode in
                             VStack(alignment: .leading) {
-                                Text(mode.rawValue)
-                                Text(mode.description)
+                                Text(mode.rawValue.localized)
+                                Text(mode.description.localized)
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
@@ -335,21 +335,21 @@ struct ServiceSettingsView: View {
                     .pickerStyle(.radioGroup)
                 }
 
-                Section("Mode Information") {
+                Section("Mode Information".localized) {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Homebrew Services")
+                        Text("Homebrew Services".localized)
                             .font(.subheadline)
                             .fontWeight(.medium)
-                        Text("Uses 'brew services' to manage dnsmasq. The service will start automatically on boot and is managed by launchd.")
+                        Text("Uses 'brew services' to manage dnsmasq. The service will start automatically on boot and is managed by launchd.".localized)
                             .font(.caption)
                             .foregroundColor(.secondary)
 
                         Divider()
 
-                        Text("Local Process")
+                        Text("Local Process".localized)
                             .font(.subheadline)
                             .fontWeight(.medium)
-                        Text("Runs dnsmasq directly as a process. You have full control but the service won't persist after reboot unless you start it again.")
+                        Text("Runs dnsmasq directly as a process. You have full control but the service won't persist after reboot unless you start it again.".localized)
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -360,19 +360,19 @@ struct ServiceSettingsView: View {
             Divider()
 
             HStack {
-                Button("Reset to Defaults") {
+                Button("Reset to Defaults".localized) {
                     dnsmasqPath = "/opt/homebrew/sbin/dnsmasq"
                     configPath = "/opt/homebrew/etc/dnsmasq.conf"
                 }
 
                 Spacer()
 
-                Button("Cancel") {
+                Button("Cancel".localized) {
                     dismiss()
                 }
                 .keyboardShortcut(.escape)
 
-                Button("Save") {
+                Button("Save".localized) {
                     dnsmasqService.dnsmasqPath = dnsmasqPath
                     dnsmasqService.configPath = configPath
                     dismiss()
@@ -402,10 +402,10 @@ struct ServiceSettingsView: View {
 
         switch type {
         case .binary:
-            panel.message = "Select dnsmasq binary"
+            panel.message = "Select dnsmasq binary".localized
             panel.directoryURL = URL(fileURLWithPath: "/opt/homebrew/sbin")
         case .config:
-            panel.message = "Select dnsmasq configuration file"
+            panel.message = "Select dnsmasq configuration file".localized
             panel.directoryURL = URL(fileURLWithPath: "/opt/homebrew/etc")
             panel.allowedContentTypes = [.text, .plainText]
         }
@@ -420,6 +420,7 @@ struct ServiceSettingsView: View {
         }
     }
 }
+
 
 #Preview {
     ServiceControlView()

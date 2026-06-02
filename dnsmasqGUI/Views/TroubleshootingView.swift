@@ -11,7 +11,7 @@ struct TroubleshootingView: View {
         VStack(spacing: 0) {
             // Header
             HStack {
-                Text("Troubleshooting Tools")
+                Text("Troubleshooting Tools".localized)
                     .font(.headline)
                 Spacer()
             }
@@ -68,15 +68,15 @@ struct TroubleshootingView: View {
                     // DNS Testing Section
                     ToolSection(title: "DNS Testing", icon: "network") {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Test Domain Resolution")
+                            Text("Test Domain Resolution".localized)
                                 .font(.subheadline)
                                 .fontWeight(.medium)
 
                             HStack {
-                                TextField("Enter domain (e.g., myapp.local)", text: $testDomain)
+                                TextField("Enter domain (e.g., myapp.local)".localized, text: $testDomain)
                                     .textFieldStyle(.roundedBorder)
 
-                                Button("Test") {
+                                Button("Test".localized) {
                                     Task { await runDNSTest() }
                                 }
                                 .disabled(testDomain.isEmpty || isRunning)
@@ -104,30 +104,30 @@ struct TroubleshootingView: View {
                     // Config Verification Section
                     ToolSection(title: "Configuration Verification", icon: "doc.text.magnifyingglass") {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Search dnsmasq.conf")
+                            Text("Search dnsmasq.conf".localized)
                                 .font(.subheadline)
                                 .fontWeight(.medium)
 
                             HStack {
-                                TextField("Search pattern (e.g., domain name)", text: $grepPattern)
+                                TextField("Search pattern (e.g., domain name)".localized, text: $grepPattern)
                                     .textFieldStyle(.roundedBorder)
 
-                                Button("Search") {
+                                Button("Search".localized) {
                                     Task { await runGrepConfig() }
                                 }
                                 .disabled(grepPattern.isEmpty || isRunning)
                             }
 
                             HStack(spacing: 8) {
-                                Button("View Full Config") {
+                                Button("View Full Config".localized) {
                                     Task { await runViewConfig() }
                                 }
 
-                                Button("List Resolver Files") {
+                                Button("List Resolver Files".localized) {
                                     Task { await runListResolvers() }
                                 }
 
-                                Button("Check Port 53") {
+                                Button("Check Port 53".localized) {
                                     Task { await runCheckPort53() }
                                 }
                             }
@@ -144,16 +144,16 @@ struct TroubleshootingView: View {
                                 if isRunning {
                                     ProgressView()
                                         .scaleEffect(0.7)
-                                    Text("Running...")
+                                    Text("Running...".localized)
                                         .foregroundColor(.secondary)
                                 }
                                 Spacer()
-                                Button("Clear") {
+                                Button("Clear".localized) {
                                     commandOutput = ""
                                 }
                                 .disabled(commandOutput.isEmpty)
 
-                                Button("Copy") {
+                                Button("Copy".localized) {
                                     NSPasteboard.general.clearContents()
                                     NSPasteboard.general.setString(commandOutput, forType: .string)
                                 }
@@ -161,7 +161,7 @@ struct TroubleshootingView: View {
                             }
 
                             ScrollView {
-                                Text(commandOutput.isEmpty ? "Run a command to see output here..." : commandOutput)
+                                Text(commandOutput.isEmpty ? "Run a command to see output here...".localized : commandOutput)
                                     .font(.system(.body, design: .monospaced))
                                     .foregroundColor(commandOutput.isEmpty ? .secondary : .primary)
                                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -185,28 +185,28 @@ struct TroubleshootingView: View {
 
     private func runFlushDNS() async {
         await runCommand(
-            "Flushing DNS cache...",
+            "Flushing DNS cache...".localized,
             command: "sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder && echo 'DNS cache flushed successfully'"
         )
     }
 
     private func runCreateResolverDir() async {
         await runCommand(
-            "Creating resolver directory...",
+            "Creating resolver directory...".localized,
             command: "sudo mkdir -p /etc/resolver && ls -la /etc/resolver 2>/dev/null || echo '/etc/resolver created (empty)'"
         )
     }
 
     private func runRestartDnsmasq() async {
         await runCommand(
-            "Restarting dnsmasq...",
+            "Restarting dnsmasq...".localized,
             command: "sudo brew services restart dnsmasq && sleep 1 && brew services list | grep dnsmasq"
         )
     }
 
     private func runCheckStatus() async {
         await runCommand(
-            "Checking dnsmasq status...",
+            "Checking dnsmasq status...".localized,
             command: "brew services list | grep dnsmasq; echo '---'; ps aux | grep '[d]nsmasq' || echo 'No dnsmasq process found'"
         )
     }
@@ -218,7 +218,7 @@ struct TroubleshootingView: View {
     private func runDscacheutilTest() async {
         let domain = testDomain.trimmingCharacters(in: .whitespaces)
         await runCommand(
-            "Testing DNS resolution for \(domain)...",
+            "Testing DNS resolution for %@...".localized(domain),
             command: "dscacheutil -q host -a name \(domain)"
         )
     }
@@ -226,7 +226,7 @@ struct TroubleshootingView: View {
     private func runDigTest() async {
         let domain = testDomain.trimmingCharacters(in: .whitespaces)
         await runCommand(
-            "Testing DNS via dig @127.0.0.1 for \(domain)...",
+            "Testing DNS via dig @127.0.0.1 for %@...".localized(domain),
             command: "dig @127.0.0.1 \(domain) +short; echo '---'; dig @127.0.0.1 \(domain)"
         )
     }
@@ -234,7 +234,7 @@ struct TroubleshootingView: View {
     private func runNslookupTest() async {
         let domain = testDomain.trimmingCharacters(in: .whitespaces)
         await runCommand(
-            "Testing DNS via nslookup for \(domain)...",
+            "Testing DNS via nslookup for %@...".localized(domain),
             command: "nslookup \(domain) 127.0.0.1"
         )
     }
@@ -242,28 +242,28 @@ struct TroubleshootingView: View {
     private func runGrepConfig() async {
         let pattern = grepPattern.trimmingCharacters(in: .whitespaces)
         await runCommand(
-            "Searching dnsmasq.conf for '\(pattern)'...",
+            "Searching dnsmasq.conf for '%@'...".localized(pattern),
             command: "grep -n '\(pattern)' /opt/homebrew/etc/dnsmasq.conf 2>/dev/null || grep -n '\(pattern)' /usr/local/etc/dnsmasq.conf 2>/dev/null || echo 'Pattern not found in config'"
         )
     }
 
     private func runViewConfig() async {
         await runCommand(
-            "Viewing dnsmasq.conf...",
+            "Viewing dnsmasq.conf...".localized,
             command: "cat /opt/homebrew/etc/dnsmasq.conf 2>/dev/null || cat /usr/local/etc/dnsmasq.conf 2>/dev/null || echo 'Config file not found'"
         )
     }
 
     private func runListResolvers() async {
         await runCommand(
-            "Listing resolver files...",
+            "Listing resolver files...".localized,
             command: "echo '=== /etc/resolver contents ===' && ls -la /etc/resolver 2>/dev/null || echo 'Directory not found'; echo ''; for f in /etc/resolver/*; do if [ -f \"$f\" ]; then echo \"=== $f ===\"; cat \"$f\"; echo ''; fi; done 2>/dev/null"
         )
     }
 
     private func runCheckPort53() async {
         await runCommand(
-            "Checking port 53...",
+            "Checking port 53...".localized,
             command: "sudo lsof -i :53 2>/dev/null || echo 'No process listening on port 53'"
         )
     }
@@ -276,7 +276,7 @@ struct TroubleshootingView: View {
             let output = try await executeCommand(command)
             commandOutput += output
         } catch {
-            commandOutput += "Error: \(error.localizedDescription)"
+            commandOutput += "Error: %@".localized(error.localizedDescription)
         }
 
         isRunning = false
@@ -316,7 +316,7 @@ struct TroubleshootingView: View {
                         continuation.resume(throwing: NSError(domain: "TroubleshootingView", code: 1, userInfo: [NSLocalizedDescriptionKey: message]))
                     }
                 } else {
-                    continuation.resume(returning: result?.stringValue ?? "Command completed (no output)")
+                    continuation.resume(returning: result?.stringValue ?? "Command completed (no output)".localized)
                 }
             }
         }
@@ -335,7 +335,7 @@ struct ToolSection<Content: View>: View {
             HStack {
                 Image(systemName: icon)
                     .foregroundColor(.accentColor)
-                Text(title)
+                Text(title.localized)
                     .font(.headline)
             }
 
@@ -382,10 +382,10 @@ struct ToolButton: View {
                 }
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(title)
+                    Text(title.localized)
                         .fontWeight(.medium)
                         .foregroundColor(.primary)
-                    Text(description)
+                    Text(description.localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }

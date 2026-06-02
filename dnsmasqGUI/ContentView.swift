@@ -36,7 +36,7 @@ struct ContentView: View {
             VStack(spacing: 0) {
                 List(NavigationItem.allCases, selection: $selectedItem) { item in
                     NavigationLink(value: item) {
-                        Label(item.rawValue, systemImage: item.icon)
+                        Label(item.rawValue.localized, systemImage: item.icon)
                     }
                 }
                 .listStyle(.sidebar)
@@ -156,20 +156,20 @@ struct WelcomeView: View {
                     .foregroundColor(.secondary)
             }
 
-            Text("Select an option from the sidebar to get started")
+            Text("Select an option from the sidebar to get started".localized)
                 .foregroundColor(.secondary)
 
             Divider()
                 .frame(width: 200)
 
             VStack(alignment: .leading, spacing: 12) {
-                QuickTip(icon: "network", title: "DNS Configuration", description: "Manage DNS records and overrides")
-                QuickTip(icon: "server.rack", title: "DHCP Configuration", description: "Configure IP ranges and static leases")
-                QuickTip(icon: "folder.badge.gearshape", title: "Resolver Files", description: "Configure /etc/resolver for DNS routing")
-                QuickTip(icon: "gearshape.2", title: "Service Control", description: "Start, stop, and monitor dnsmasq")
-                QuickTip(icon: "doc.text.magnifyingglass", title: "Log Viewer", description: "View real-time DNS/DHCP logs")
-                QuickTip(icon: "wrench.and.screwdriver", title: "Troubleshooting", description: "DNS tools, cache flush, and diagnostics")
-                QuickTip(icon: "arrow.triangle.2.circlepath", title: "Backup & Import", description: "Backup configs, import hosts, TLD presets")
+                QuickTip(icon: "network", title: "DNS Configuration".localized, description: "Manage DNS records and overrides".localized)
+                QuickTip(icon: "server.rack", title: "DHCP Configuration".localized, description: "Configure IP ranges and static leases".localized)
+                QuickTip(icon: "folder.badge.gearshape", title: "Resolver Files".localized, description: "Configure /etc/resolver for DNS routing".localized)
+                QuickTip(icon: "gearshape.2", title: "Service Control".localized, description: "Start, stop, and monitor dnsmasq".localized)
+                QuickTip(icon: "doc.text.magnifyingglass", title: "Log Viewer".localized, description: "View real-time DNS/DHCP logs".localized)
+                QuickTip(icon: "wrench.and.screwdriver", title: "Troubleshooting".localized, description: "DNS tools, cache flush, and diagnostics".localized)
+                QuickTip(icon: "arrow.triangle.2.circlepath", title: "Backup & Import".localized, description: "Backup configs, import hosts, TLD presets".localized)
             }
         }
         .padding(40)

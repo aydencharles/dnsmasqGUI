@@ -28,6 +28,8 @@
 		A10000000000000000000020 /* TroubleshootingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000020 /* TroubleshootingView.swift */; };
 		A10000000000000000000021 /* BackupRestoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000021 /* BackupRestoreView.swift */; };
 		A10000000000000000000022 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000022 /* SettingsView.swift */; };
+		A10000000000000000000030 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000030 /* LanguageManager.swift */; };
+		A10000000000000000000033 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000033 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,9 @@
 		A20000000000000000000020 /* TroubleshootingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TroubleshootingView.swift; sourceTree = "<group>"; };
 		A20000000000000000000021 /* BackupRestoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupRestoreView.swift; sourceTree = "<group>"; };
 		A20000000000000000000022 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A20000000000000000000030 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		A20000000000000000000031 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A20000000000000000000032 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A30000000000000000000001 /* dnsmasqGUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dnsmasqGUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -85,6 +90,7 @@
 				A50000000000000000000005 /* Services */,
 				A20000000000000000000014 /* Assets.xcassets */,
 				A20000000000000000000015 /* dnsmasqGUI.entitlements */,
+				A20000000000000000000033 /* Localizable.strings */,
 			);
 			path = dnsmasqGUI;
 			sourceTree = "<group>";
@@ -124,6 +130,7 @@
 				A20000000000000000000012 /* ConfigManager.swift */,
 				A20000000000000000000013 /* LogReader.swift */,
 				A20000000000000000000018 /* ResolverManager.swift */,
+				A20000000000000000000030 /* LanguageManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -178,6 +185,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = A50000000000000000000001;
 			productRefGroup = A50000000000000000000006 /* Products */;
@@ -189,12 +197,25 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXVariantGroup section */
+		A20000000000000000000033 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A20000000000000000000031 /* en */,
+				A20000000000000000000032 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin PBXResourcesBuildPhase section */
 		A70000000000000000000002 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A10000000000000000000014 /* Assets.xcassets in Resources */,
+				A10000000000000000000033 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +246,7 @@
 				A10000000000000000000020 /* TroubleshootingView.swift in Sources */,
 				A10000000000000000000021 /* BackupRestoreView.swift in Sources */,
 				A10000000000000000000022 /* SettingsView.swift in Sources */,
+				A10000000000000000000030 /* LanguageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

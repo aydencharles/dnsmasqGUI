@@ -1,0 +1,467 @@
+/* 
+  Localizable.strings
+  dnsmasqGUI
+*/
+
+// Sidebar & Tabs
+"DNS Configuration" = "DNS Configuration";
+"DHCP Configuration" = "DHCP Configuration";
+"Resolver Files" = "Resolver Files";
+"Service Control" = "Service Control";
+"Log Viewer" = "Log Viewer";
+"Troubleshooting" = "Troubleshooting";
+"Backup & Import" = "Backup & Import";
+"Settings" = "Settings";
+
+// System Language
+"System Language" = "System Language";
+"System" = "System";
+"Light" = "Light";
+"Dark" = "Dark";
+
+// Dnsmasq Mode
+"Homebrew Services" = "Homebrew Services";
+"Local Process" = "Local Process";
+"Manage via 'brew services' (recommended for persistent service)" = "Manage via 'brew services' (recommended for persistent service)";
+"Run dnsmasq directly as a local process" = "Run dnsmasq directly as a local process";
+
+// Welcome Screen
+"Select an option from the sidebar to get started" = "Select an option from the sidebar to get started";
+"Quick Setup Guide" = "Quick Setup Guide";
+"Manage DNS records and overrides" = "Manage DNS records and overrides";
+"Configure IP ranges and static leases" = "Configure IP ranges and static leases";
+"Configure /etc/resolver for DNS routing" = "Configure /etc/resolver for DNS routing";
+"Start, stop, and monitor dnsmasq" = "Start, stop, and monitor dnsmasq";
+"View real-time DNS/DHCP logs" = "View real-time DNS/DHCP logs";
+"DNS tools, cache flush, and diagnostics" = "DNS tools, cache flush, and diagnostics";
+"Backup configs, import hosts, TLD presets" = "Backup configs, import hosts, TLD presets";
+
+// Common Buttons & Actions
+"Add" = "Add";
+"Edit" = "Edit";
+"Delete" = "Delete";
+"Save" = "Save";
+"Reload" = "Reload";
+"Cancel" = "Cancel";
+"Close" = "Close";
+"Retry" = "Retry";
+"Test" = "Test";
+"Browse" = "Browse";
+"Done" = "Done";
+"OK" = "OK";
+"Add Record" = "Add Record";
+"Reset to Defaults" = "Reset to Defaults";
+"Loading configuration..." = "Loading configuration...";
+"Unsaved Changes" = "Unsaved Changes";
+
+// Settings View
+"Configure Handed preferences" = "Configure Handed preferences";
+"Startup" = "Startup";
+"Launch at Startup" = "Launch at Startup";
+"Automatically start Handed when you log in" = "Automatically start Handed when you log in";
+"Menu Bar Only" = "Menu Bar Only";
+"Hide the Dock icon and run only in the menu bar" = "Hide the Dock icon and run only in the menu bar";
+"Theme" = "Theme";
+"Appearance" = "Appearance";
+"Choose how Handed appears. Select System to automatically match your Mac's appearance." = "Choose how Handed appears. Select System to automatically match your Mac's appearance.";
+"Language" = "Language";
+"Choose the application language." = "Choose the application language.";
+"Menu Bar" = "Menu Bar";
+"Menu Bar Access" = "Menu Bar Access";
+"Handed always shows in the menu bar for quick access to start/stop dnsmasq, flush DNS cache, and check status." = "Handed always shows in the menu bar for quick access to start/stop dnsmasq, flush DNS cache, and check status.";
+"Running" = "Running";
+"Stopped" = "Stopped";
+"Error" = "Error";
+"Unknown" = "Unknown";
+"About" = "About";
+"A native macOS GUI for dnsmasq" = "A native macOS GUI for dnsmasq";
+"Version %@" = "Version %@";
+"Version %@ (%@)" = "Version %@ (%@)";
+"GitHub" = "GitHub";
+"Report Issue" = "Report Issue";
+"Restart Required" = "Restart Required";
+"The Dock icon change will take full effect after restarting Handed." = "The Dock icon change will take full effect after restarting Handed.";
+
+// App Commands & Menu Bar
+"About Handed" = "About Handed";
+"Handed Help" = "Handed Help";
+"GitHub Repository" = "GitHub Repository";
+"Report an Issue" = "Report an Issue";
+"Reload Configuration" = "Reload Configuration";
+"Start Service" = "Start Service";
+"Stop Service" = "Stop Service";
+"Restart Service" = "Restart Service";
+"Handed - DNSmasqGUI" = "Handed - DNSmasqGUI";
+"● dnsmasq is running" = "● dnsmasq is running";
+"○ dnsmasq is stopped" = "○ dnsmasq is stopped";
+"✕ dnsmasq error" = "✕ dnsmasq error";
+"? dnsmasq status unknown" = "? dnsmasq status unknown";
+"Start dnsmasq" = "Start dnsmasq";
+"Stop dnsmasq" = "Stop dnsmasq";
+"Restart dnsmasq" = "Restart dnsmasq";
+"Flush DNS Cache" = "Flush DNS Cache";
+"Refresh Status" = "Refresh Status";
+"Open Handed" = "Open Handed";
+"Quit Handed" = "Quit Handed";
+"DNS Cache Flushed" = "DNS Cache Flushed";
+"DNS cache has been cleared successfully" = "DNS cache has been cleared successfully";
+"Handed will now run in the menu bar only" = "Handed will now run in the menu bar only";
+"Dock Icon Enabled" = "Dock Icon Enabled";
+"Handed will now show in the Dock" = "Handed will now show in the Dock";
+"Handed will now start automatically at login" = "Handed will now start automatically at login";
+"Launch at Startup Disabled" = "Launch at Startup Disabled";
+"Handed will no longer start at login" = "Handed will no longer start at login";
+"Menu Bar Only (Hide Dock Icon)" = "Menu Bar Only (Hide Dock Icon)";
+"Preferences" = "Preferences";
+
+// DNS Configuration View
+"DNS Records" = "DNS Records";
+"No DNS records configured" = "No DNS records configured";
+"Add DNS overrides, upstream servers, or local-only domains" = "Add DNS overrides, upstream servers, or local-only domains";
+"Add Your First Record" = "Add Your First Record";
+"Test Resolution" = "Test Resolution";
+"Delete Record" = "Delete Record";
+"Are you sure you want to delete the record for '%@'?" = "Are you sure you want to delete the record for '%@'?";
+"DNS Test Result" = "DNS Test Result";
+"Test Passed" = "Test Passed";
+"Test Failed" = "Test Failed";
+"Domain:" = "Domain:";
+"Expected:" = "Expected:";
+"Resolved:" = "Resolved:";
+"No response from DNS server. Is dnsmasq running?" = "No response from DNS server. Is dnsmasq running?";
+"DNS resolution successful" = "DNS resolution successful";
+"Resolved IP doesn't match expected value" = "Resolved IP doesn't match expected value";
+"Test failed: %@" = "Test failed: %@";
+
+// DNS Record Types
+"Address Override" = "Address Override";
+"Upstream Server" = "Upstream Server";
+"Local Only" = "Local Only";
+"Override DNS resolution for a domain to a specific IP" = "Override DNS resolution for a domain to a specific IP";
+"Use a specific DNS server for a domain" = "Use a specific DNS server for a domain";
+"Only answer from local configuration, never forward" = "Only answer from local configuration, never forward";
+
+// DNS Record Editor
+"Edit DNS Record" = "Edit DNS Record";
+"Add DNS Record" = "Add DNS Record";
+"Record Type" = "Record Type";
+"Type" = "Type";
+"Domain" = "Domain";
+"IP Address" = "IP Address";
+"DNS Server" = "DNS Server";
+"Comment (optional)" = "Comment (optional)";
+"Description or notes" = "Description or notes";
+"Config Preview" = "Config Preview";
+"The domain name to override (e.g., myapp.local)" = "The domain name to override (e.g., myapp.local)";
+"Domain to route to specific DNS, or leave empty for all queries" = "Domain to route to specific DNS, or leave empty for all queries";
+"Domain that should only be answered locally" = "Domain that should only be answered locally";
+"The IP address this domain should resolve to" = "The IP address this domain should resolve to";
+"The DNS server IP to use for this domain" = "The DNS server IP to use for this domain";
+"corp.example.com (or empty for all)" = "corp.example.com (or empty for all)";
+"# Enter a domain to see preview" = "# Enter a domain to see preview";
+
+
+// DHCP Configuration View
+"Ranges (%d)" = "Ranges (%d)";
+"Static Hosts (%d)" = "Static Hosts (%d)";
+"Options (%d)" = "Options (%d)";
+"Add DHCP Range" = "Add DHCP Range";
+"Add Static Host" = "Add Static Host";
+"Add DHCP Option" = "Add DHCP Option";
+"No DHCP ranges configured" = "No DHCP ranges configured";
+"No static hosts configured" = "No static hosts configured";
+"No DHCP options configured" = "No DHCP options configured";
+"Delete Entry" = "Delete Entry";
+"Are you sure you want to delete this DHCP entry?" = "Are you sure you want to delete this DHCP entry?";
+"Netmask: %@" = "Netmask: %@";
+
+// DHCP Editors
+"Edit DHCP Range" = "Edit DHCP Range";
+"Start IP" = "Start IP";
+"End IP" = "End IP";
+"Netmask (optional)" = "Netmask (optional)";
+"Lease Time (e.g., 12h, 1d)" = "Lease Time (e.g., 12h, 1d)";
+"Edit Static Host" = "Edit Static Host";
+"MAC Address" = "MAC Address";
+"Hostname (optional)" = "Hostname (optional)";
+"Lease Time (optional)" = "Lease Time (optional)";
+"Edit DHCP Option" = "Edit DHCP Option";
+"Use Custom Option Number" = "Use Custom Option Number";
+"Option Number" = "Option Number";
+"Value" = "Value";
+"Option" = "Option";
+"Option %d" = "Option %d";
+
+// DHCP Option Names
+"Subnet Mask" = "Subnet Mask";
+"Router/Gateway" = "Router/Gateway";
+"DNS Server" = "DNS Server";
+"Domain Name" = "Domain Name";
+"Broadcast Address" = "Broadcast Address";
+"NTP Server" = "NTP Server";
+"WINS Server" = "WINS Server";
+"Domain Search List" = "Domain Search List";
+
+// Service Control View
+"Execution Mode" = "Execution Mode";
+"Mode" = "Mode";
+"dnsmasq Service" = "dnsmasq Service";
+"PID: %d" = "PID: %d";
+"Mode: %@" = "Mode: %@";
+"Start" = "Start";
+"Stop" = "Stop";
+"Restart" = "Restart";
+"Quick Actions" = "Quick Actions";
+"Refresh Status" = "Refresh Status";
+"Validate Config" = "Validate Config";
+"Save & Restart" = "Save & Restart";
+"Paths" = "Paths";
+"dnsmasq binary:" = "dnsmasq binary:";
+"Config file:" = "Config file:";
+"Output" = "Output";
+"No output" = "No output";
+"Service Settings" = "Service Settings";
+"dnsmasq Binary Path" = "dnsmasq Binary Path";
+"Config File Path" = "Config File Path";
+"Mode Information" = "Mode Information";
+"Homebrew Services" = "Homebrew Services";
+"Uses 'brew services' to manage dnsmasq. The service will start automatically on boot and is managed by launchd." = "Uses 'brew services' to manage dnsmasq. The service will start automatically on boot and is managed by launchd.";
+"Local Process" = "Local Process";
+"Runs dnsmasq directly as a process. You have full control but the service won't persist after reboot unless you start it again." = "Runs dnsmasq directly as a process. You have full control but the service won't persist after reboot unless you start it again.";
+"Select dnsmasq binary" = "Select dnsmasq binary";
+"Select dnsmasq configuration file" = "Select dnsmasq configuration file";
+"Configuration Validation" = "Configuration Validation";
+"Configuration is valid and ready to use." = "Configuration is valid and ready to use.";
+"Validation failed: %@" = "Validation failed: %@";
+
+// Resolver Config View
+"Resolver Routes" = "Resolver Routes";
+"No resolver files configured" = "No resolver files configured";
+"Manage macOS resolver files in /etc/resolver to route specific domains to dnsmasq" = "Manage macOS resolver files in /etc/resolver to route specific domains to dnsmasq";
+"Add Resolver File" = "Add Resolver File";
+"Status" = "Status";
+"Add Resolver" = "Add Resolver";
+"Edit Resolver" = "Edit Resolver";
+"Edit Resolver File" = "Edit Resolver File";
+"Edit resolver file" = "Edit resolver file";
+"Nameserver" = "Nameserver";
+"Port" = "Port";
+"Port (optional)" = "Port (optional)";
+"Custom Port" = "Custom Port";
+"Only check to use a custom port (dnsmasq defaults to 53)" = "Only check to use a custom port (dnsmasq defaults to 53)";
+"Path: %@" = "Path: %@";
+"Exists" = "Exists";
+"Missing" = "Missing";
+"No Resolver Files Found" = "No Resolver Files Found";
+"Resolver files in /etc/resolver/ route DNS queries for specific domains to custom DNS servers." = "Resolver files in /etc/resolver/ route DNS queries for specific domains to custom DNS servers.";
+"Common use cases:" = "Common use cases:";
+"Route .local domains to your local dnsmasq" = "Route .local domains to your local dnsmasq";
+"Route .test or .dev domains to localhost" = "Route .test or .dev domains to localhost";
+"Route corporate domains to internal DNS" = "Route corporate domains to internal DNS";
+"Create Your First Resolver" = "Create Your First Resolver";
+"View File Content" = "View File Content";
+"Resolver files route DNS queries for specific TLDs to custom nameservers" = "Resolver files route DNS queries for specific TLDs to custom nameservers";
+"Are you sure you want to delete the resolver file for '%@'?\n\nThis will remove /etc/resolver/%@" = "Are you sure you want to delete the resolver file for '%@'?\n\nThis will remove /etc/resolver/%@";
+"Domain / TLD" = "Domain / TLD";
+"The filename determines which domains are routed (e.g., 'local' routes all *.local queries)" = "The filename determines which domains are routed (e.g., 'local' routes all *.local queries)";
+"Nameservers" = "Nameservers";
+"One IP address per line. These DNS servers will handle queries for *.%@" = "One IP address per line. These DNS servers will handle queries for *.%@";
+"File Preview" = "File Preview";
+"How it works" = "How it works";
+"macOS checks /etc/resolver/ when resolving domains" = "macOS checks /etc/resolver/ when resolving domains";
+"If a file matches the TLD, those nameservers are used" = "If a file matches the TLD, those nameservers are used";
+"Example: /etc/resolver/local routes *.local to 127.0.0.1" = "Example: /etc/resolver/local routes *.local to 127.0.0.1";
+"Create" = "Create";
+
+// Log Viewer View
+"Logs" = "Logs";
+"Filter logs..." = "Filter logs...";
+"Auto-scroll" = "Auto-scroll";
+"Clear" = "Clear";
+"Export" = "Export";
+"Monitoring" = "Monitoring";
+"No log entries yet" = "No log entries yet";
+"Start Monitoring" = "Start Monitoring";
+"No matching log entries" = "No matching log entries";
+"%d entries" = "%d entries";
+"(filtered from %d)" = "(filtered from %d)";
+"Last updated: %@" = "Last updated: %@";
+"No log entries found" = "No log entries found";
+"Logs require log-queries to be enabled in dnsmasq.conf." = "Logs require log-queries to be enabled in dnsmasq.conf.";
+"Configure Logs" = "Configure Logs";
+"Configure logging" = "Configure logging";
+"Log file path:" = "Log file path:";
+"Log Queries" = "Log Queries";
+"Log extra info for each DNS query" = "Log extra info for each DNS query";
+"Log DHCP" = "Log DHCP";
+"Log extra info for DHCP transactions" = "Log extra info for DHCP transactions";
+"Save & Restart Service" = "Save & Restart Service";
+
+// Troubleshooting View
+"Troubleshooting Tools" = "Troubleshooting Tools";
+"Quick Actions" = "Quick Actions";
+"Flush DNS Cache" = "Flush DNS Cache";
+"Clear macOS DNS cache and restart mDNSResponder" = "Clear macOS DNS cache and restart mDNSResponder";
+"Create Resolver Directory" = "Create Resolver Directory";
+"Create /etc/resolver if it doesn't exist" = "Create /etc/resolver if it doesn't exist";
+"Restart dnsmasq" = "Restart dnsmasq";
+"Restart dnsmasq via Homebrew services" = "Restart dnsmasq via Homebrew services";
+"Check dnsmasq Status" = "Check dnsmasq Status";
+"Show current dnsmasq service status" = "Show current dnsmasq service status";
+"DNS Testing" = "DNS Testing";
+"Test Domain Resolution" = "Test Domain Resolution";
+"Enter domain (e.g., myapp.local)" = "Enter domain (e.g., myapp.local)";
+"Test" = "Test";
+"Configuration Verification" = "Configuration Verification";
+"Search dnsmasq.conf" = "Search dnsmasq.conf";
+"Search pattern (e.g., domain name)" = "Search pattern (e.g., domain name)";
+"Search" = "Search";
+"View Full Config" = "View Full Config";
+"List Resolver Files" = "List Resolver Files";
+"Check Port 53" = "Check Port 53";
+"Command Output" = "Command Output";
+"Running..." = "Running...";
+"Clear" = "Clear";
+"Copy" = "Copy";
+"Run a command to see output here..." = "Run a command to see output here...";
+"Flushing DNS cache..." = "Flushing DNS cache...";
+"Creating resolver directory..." = "Creating resolver directory...";
+"Restarting dnsmasq..." = "Restarting dnsmasq...";
+"Checking dnsmasq status..." = "Checking dnsmasq status...";
+"Testing DNS resolution for %@..." = "Testing DNS resolution for %@...";
+"Testing DNS via dig @127.0.0.1 for %@..." = "Testing DNS via dig @127.0.0.1 for %@...";
+"Testing DNS via nslookup for %@..." = "Testing DNS via nslookup for %@...";
+"Searching dnsmasq.conf for '%@'..." = "Searching dnsmasq.conf for '%@'...";
+"Viewing dnsmasq.conf..." = "Viewing dnsmasq.conf...";
+"Listing resolver files..." = "Listing resolver files...";
+"Checking port 53..." = "Checking port 53...";
+"Error: %@" = "Error: %@";
+"Command completed (no output)" = "Command completed (no output)";
+
+// Backup & Import View
+"Backup & Restore" = "Backup & Restore";
+"Create Backup" = "Create Backup";
+"Restore from File" = "Restore from File";
+"Preset TLDs" = "Preset TLDs";
+"Import Hosts File" = "Import Hosts File";
+"Backups" = "Backups";
+"Export configuration backups and restore them" = "Export configuration backups and restore them";
+"No backups found" = "No backups found";
+"Restore" = "Restore";
+"Are you sure you want to restore the configuration from this backup? Current configuration will be overwritten." = "Are you sure you want to restore the configuration from this backup? Current configuration will be overwritten.";
+"Preset Top-Level Domains" = "Preset Top-Level Domains";
+"Configure resolver files and DNS overrides for common development TLDs" = "Configure resolver files and DNS overrides for common development TLDs";
+"This will create DNS records and resolver files routing the selected TLD to 127.0.0.1" = "This will create DNS records and resolver files routing the selected TLD to 127.0.0.1";
+"Setup Preset TLD" = "Setup Preset TLD";
+"Setup Preset TLD: %@" = "Setup Preset TLD: %@";
+"Hosts File Import" = "Hosts File Import";
+"Import records from a hosts-formatted file" = "Hosts File Import";
+"Select Hosts File" = "Select Hosts File";
+"records" = "records";
+"Select backup file" = "Select backup file";
+"Select hosts file to import" = "Select hosts file to import";
+"Backup created successfully" = "Backup created successfully";
+"Backup file:" = "Backup file:";
+"Restore successful" = "Restore successful";
+"Configuration restored. Restart dnsmasq to apply changes." = "Configuration restored. Restart dnsmasq to apply changes.";
+"Import Successful" = "Import Successful";
+"Imported %d records into DNS configuration." = "Imported %d records into DNS configuration.";
+"Failed to import records: %@" = "Failed to import records: %@";
+"TLD Setup Successful" = "TLD Setup Successful";
+"Configured DNS override and resolver file for .%@. Restart service to apply." = "Configured DNS override and resolver file for .%@. Restart service to apply.";
+"Failed to configure TLD: %@" = "Failed to configure TLD: %@";
+
+// About View Description & Copyright
+"A native macOS GUI for managing dnsmasq and DNS resolvers" = "A native macOS GUI for managing dnsmasq and DNS resolvers";
+"Created by Justin James" = "Created by Justin James";
+"© 2026 Justin James. MIT License." = "© 2026 Justin James. MIT License.";
+
+// Help Content Keys
+"Help_GettingStarted_Content" = "1. Install dnsmasq via Homebrew: brew install dnsmasq\n2. Use Service Control to start/stop dnsmasq\n3. Add DNS records to override domain resolution\n4. Configure resolver files to route DNS queries\n5. Save changes and restart the service";
+
+"Help_DNSConfig_Content" = "• Address Override: Map a domain to a specific IP\n• Upstream Server: Route queries to specific DNS\n• Local Only: Answer from local config only\n\nClick + to add, pencil to edit, or right-click for options.\nUse the Test button to verify DNS resolution.";
+
+"Help_DHCPConfig_Content" = "• Ranges: Define DHCP IP address pools\n• Static Hosts: Assign fixed IPs to MAC addresses\n• Options: Configure gateway, DNS, etc.\n\nChanges require saving and restarting the service.";
+
+"Help_ResolverFiles_Content" = "Manage macOS resolver files in /etc/resolver:\n• Route specific domains to custom DNS servers\n• Point .local, .test, etc. to 127.0.0.1\n\nCreate files like /etc/resolver/local to route all *.local queries to your local dnsmasq.\n\nExample: /etc/resolver/mycompany.cloud\n→ Routes all *.mycompany.cloud to 127.0.0.1";
+
+"Help_QuickSetup_Content" = "Complete setup in 5 steps:\n\n1. Install dnsmasq:\n   brew install dnsmasq\n\n2. Add DNS records in DNS Configuration\n   (address=/mydomain.local/127.0.0.1)\n\n3. Create resolver file in Resolver Files\n   (/etc/resolver/mydomain.local → 127.0.0.1)\n\n4. Start dnsmasq via Service Control\n\n5. Flush DNS cache in Troubleshooting\n   (or run: sudo dscacheutil -flushcache)";
+
+"Help_ServiceControl_Content" = "Two execution modes:\n• Homebrew Services: Persistent, auto-starts on boot\n• Local Process: Manual control, no persistence\n\nUse Settings to configure custom paths.";
+
+"Help_LogViewer_Content" = "View dnsmasq logs in real-time.\n• Use the search box to filter entries\n• Enable Auto-scroll to follow new logs\n• Export logs for troubleshooting";
+
+"Help_KeyboardShortcuts_Content" = "⌘R - Reload Configuration\n⇧⌘S - Start Service\n⇧⌘X - Stop Service\n⇧⌘R - Restart Service";
+
+"Help_Troubleshooting_Content" = "Common issues and solutions:\n\nDNS not resolving?\n1. Flush DNS cache (Troubleshooting → Flush DNS)\n2. Verify dnsmasq is running (check Service Control)\n3. Check resolver file exists for your domain\n4. Test with: dig @127.0.0.1 yourdomain.local\n\nService won't start?\n• Check port 53: sudo lsof -i :53\n• Stop conflicting services first\n\nTesting DNS resolution:\n• dscacheutil -q host -a name yourdomain.local\n• dig @127.0.0.1 yourdomain.local\n• nslookup yourdomain.local 127.0.0.1\n\nConfig: /opt/homebrew/etc/dnsmasq.conf\nResolvers: /etc/resolver/";
+
+// Backup & Restore View (Actual)
+"Backup Configuration" = "Backup Configuration";
+"Save your current dnsmasq configuration and resolver files to a backup folder." = "Save your current dnsmasq configuration and resolver files to a backup folder.";
+"Backs up: dnsmasq.conf + /etc/resolver/* files" = "Backs up: dnsmasq.conf + /etc/resolver/* files";
+"Restore Configuration" = "Restore Configuration";
+"Restore a previous backup of your dnsmasq configuration." = "Restore a previous backup of your dnsmasq configuration.";
+"Restore from Backup" = "Restore from Backup";
+"Select a backup folder created by Handed" = "Select a backup folder created by Handed";
+"Import from Hosts Format" = "Import from Hosts Format";
+"Import DNS entries from /etc/hosts format or paste entries directly." = "Import DNS entries from /etc/hosts format or paste entries directly.";
+"Import /etc/hosts" = "Import /etc/hosts";
+"Paste Entries" = "Paste Entries";
+"Format: IP_ADDRESS HOSTNAME (e.g., 127.0.0.1 myapp.local)" = "Format: IP_ADDRESS HOSTNAME (e.g., 127.0.0.1 myapp.local)";
+"Export Configuration" = "Export Configuration";
+"Export your DNS records to various formats for sharing or documentation." = "Export your DNS records to various formats for sharing or documentation.";
+"Export as Hosts" = "Export as Hosts";
+"Export dnsmasq.conf" = "Export dnsmasq.conf";
+"Quick TLD Presets" = "Quick TLD Presets";
+"One-click setup for common local development TLDs. Creates resolver files pointing to 127.0.0.1." = "One-click setup for common local development TLDs. Creates resolver files pointing to 127.0.0.1.";
+"Local Development" = "Local Development";
+"*.local" = "*.local";
+"*.test" = "*.test";
+"*.dev" = "*.dev";
+"*.localhost" = "*.localhost";
+"*.internal" = "*.internal";
+"*.lan" = "*.lan";
+"Kubernetes / Cloud" = "Kubernetes / Cloud";
+"K8s internal" = "K8s internal";
+"K8s services" = "K8s services";
+"AWS Local Emulation" = "AWS Local Emulation";
+"Route AWS service domains to localhost for local development with LocalStack, ElasticMQ, etc." = "Route AWS service domains to localhost for local development with LocalStack, ElasticMQ, etc.";
+"All AWS" = "All AWS";
+"ElastiCache" = "ElastiCache";
+"RDS" = "RDS";
+"SQS" = "SQS";
+"S3" = "S3";
+"Important: DNS alone is not enough for AWS SDK services" = "Important: DNS alone is not enough for AWS SDK services";
+"You also need endpoint configuration in your app:" = "You also need endpoint configuration in your app:";
+"Custom Domain" = "Custom Domain";
+"Create a resolver for any custom domain." = "Create a resolver for any custom domain.";
+"Domain (e.g., mycompany.cloud)" = "Domain (e.g., mycompany.cloud)";
+"Create" = "Create";
+"Creates /etc/resolver/%@ → 127.0.0.1" = "Creates /etc/resolver/%@ → 127.0.0.1";
+"Dismiss" = "Dismiss";
+"Choose Backup Location" = "Choose Backup Location";
+"Backup created successfully at %@" = "Backup created successfully at %@";
+"Backup failed: %@" = "Backup failed: %@";
+"Select Backup Folder" = "Select Backup Folder";
+"Not a valid Handed backup folder" = "Not a valid Handed backup folder";
+"Configuration restored successfully" = "Configuration restored successfully";
+"Restore failed: %@" = "Restore failed: %@";
+"No valid entries found in /etc/hosts" = "No valid entries found in /etc/hosts";
+"Imported %d entries from /etc/hosts" = "Imported %d entries from /etc/hosts";
+"Failed to read /etc/hosts: %@" = "Failed to read /etc/hosts: %@";
+"No valid entries found" = "No valid entries found";
+"Imported %d entries" = "Imported %d entries";
+"Export as Hosts File" = "Export as Hosts File";
+"Exported to %@" = "Exported to %@";
+"Export failed: %@" = "Export failed: %@";
+"Created resolver for *.%@ → 127.0.0.1" = "Created resolver for *.%@ → 127.0.0.1";
+"Failed to create resolver for .%@" = "Failed to create resolver for .%@";
+"Created by Handed for *.%@ domains" = "Created by Handed for *.%@ domains";
+"Imported from hosts" = "Imported from hosts";
+"Unknown error" = "Unknown error";
+"Script error: %@" = "Script error: %@";
+"Import DNS Entries" = "Import DNS Entries";
+"Paste entries in hosts file format (IP ADDRESS followed by HOSTNAME):" = "Paste entries in hosts file format (IP ADDRESS followed by HOSTNAME):";
+"Example:\n127.0.0.1 myapp.local\n192.168.1.100 database.internal api.internal" = "Example:\n127.0.0.1 myapp.local\n192.168.1.100 database.internal api.internal";
+"Import" = "Import";
+"Cancel" = "Cancel";

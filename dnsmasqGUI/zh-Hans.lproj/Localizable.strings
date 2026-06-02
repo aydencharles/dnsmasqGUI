@@ -1,0 +1,448 @@
+/* 
+  Localizable.strings
+  dnsmasqGUI
+*/
+
+// Sidebar & Tabs
+"DNS Configuration" = "DNS 配置";
+"DHCP Configuration" = "DHCP 配置";
+"Resolver Files" = "解析器文件";
+"Service Control" = "服务控制";
+"Log Viewer" = "日志查看器";
+"Troubleshooting" = "故障排除";
+"Backup & Import" = "备份与导入";
+"Settings" = "设置";
+
+// System Language
+"System Language" = "系统语言";
+"System" = "系统";
+"Light" = "浅色";
+"Dark" = "深色";
+
+// Dnsmasq Mode
+"Homebrew Services" = "Homebrew Services";
+"Local Process" = "本地进程";
+"Manage via 'brew services' (recommended for persistent service)" = "使用 'brew services' 管理 (推荐，可持久化运行)";
+"Run dnsmasq directly as a local process" = "直接作为本地进程运行 dnsmasq";
+
+// Welcome Screen
+"Select an option from the sidebar to get started" = "在边栏中选择一个选项以开始";
+"Quick Setup Guide" = "快速设置指南";
+"Manage DNS records and overrides" = "管理 DNS 记录和覆盖";
+"Configure IP ranges and static leases" = "配置 IP 范围和静态租约";
+"Configure /etc/resolver for DNS routing" = "配置 /etc/resolver 进行 DNS 路由";
+"Start, stop, and monitor dnsmasq" = "启动、停止和监控 dnsmasq";
+"View real-time DNS/DHCP logs" = "查看实时 DNS/DHCP 日志";
+"DNS tools, cache flush, and diagnostics" = "DNS 工具、刷新缓存和诊断";
+"Backup configs, import hosts, TLD presets" = "备份配置、导入 hosts、TLD 预设";
+
+// Common Buttons & Actions
+"Add" = "添加";
+"Edit" = "编辑";
+"Delete" = "删除";
+"Save" = "保存";
+"Reload" = "重新加载";
+"Cancel" = "取消";
+"Close" = "关闭";
+"Retry" = "重试";
+"Test" = "测试";
+"Browse" = "浏览";
+"Done" = "完成";
+"OK" = "确定";
+"Add Record" = "添加记录";
+"Reset to Defaults" = "重置为默认值";
+"Loading configuration..." = "正在加载配置...";
+"Unsaved Changes" = "未保存的更改";
+
+// Settings View
+"Configure Handed preferences" = "配置 Handed 首选项";
+"Startup" = "启动";
+"Launch at Startup" = "开机自启";
+"Automatically start Handed when you log in" = "登录时自动启动 Handed";
+"Menu Bar Only" = "仅菜单栏模式";
+"Hide the Dock icon and run only in the menu bar" = "隐藏 Dock 图标并仅在菜单栏中运行";
+"Theme" = "主题";
+"Appearance" = "外观";
+"Choose how Handed appears. Select System to automatically match your Mac's appearance." = "选择 Handed 的显示外观。选择系统以自动匹配您的 Mac 外观。";
+"Language" = "语言";
+"Choose the application language." = "选择应用程序语言。";
+"Menu Bar" = "菜单栏";
+"Menu Bar Access" = "菜单栏访问";
+"Handed always shows in the menu bar for quick access to start/stop dnsmasq, flush DNS cache, and check status." = "Handed 始终在菜单栏中显示，以便快速执行启动/停止 dnsmasq、刷新 DNS 缓存和检查状态等操作。";
+"Running" = "运行中";
+"Stopped" = "已停止";
+"Error" = "错误";
+"Unknown" = "未知";
+"About" = "关于";
+"A native macOS GUI for dnsmasq" = "用于 dnsmasq 的原生 macOS 界面";
+"Version %@" = "版本 %@";
+"Version %@ (%@)" = "版本 %@ (%@)";
+"GitHub" = "GitHub";
+"Report Issue" = "报告问题";
+"Restart Required" = "需要重新启动";
+"The Dock icon change will take full effect after restarting Handed." = "Dock 图标的更改将在重新启动 Handed 后完全生效。";
+
+// App Commands & Menu Bar
+"About Handed" = "关于 Handed";
+"Handed Help" = "Handed 帮助";
+"GitHub Repository" = "GitHub 仓库";
+"Report an Issue" = "报告问题";
+"Reload Configuration" = "重新加载配置";
+"Start Service" = "启动服务";
+"Stop Service" = "停止服务";
+"Restart Service" = "重启服务";
+"Handed - DNSmasqGUI" = "Handed - DNSmasq 界面";
+"● dnsmasq is running" = "● dnsmasq 正在运行";
+"○ dnsmasq is stopped" = "○ dnsmasq 已停止";
+"✕ dnsmasq error" = "✕ dnsmasq 错误";
+"? dnsmasq status unknown" = "? dnsmasq 状态未知";
+"Start dnsmasq" = "启动 dnsmasq";
+"Stop dnsmasq" = "停止 dnsmasq";
+"Restart dnsmasq" = "重启 dnsmasq";
+"Flush DNS Cache" = "刷新 DNS 缓存";
+"Refresh Status" = "刷新状态";
+"Open Handed" = "打开 Handed";
+"Quit Handed" = "退出 Handed";
+"DNS Cache Flushed" = "DNS 缓存已刷新";
+"DNS cache has been cleared successfully" = "DNS 缓存清除成功";
+"Handed will now run in the menu bar only" = "Handed 现在将仅在菜单栏中运行";
+"Dock Icon Enabled" = "启用 Dock 图标";
+"Handed will now show in the Dock" = "Handed 现在将在 Dock 中显示";
+"Handed will now start automatically at login" = "Handed 现在将在登录时自动启动";
+"Launch at Startup Disabled" = "已禁用开机自启";
+"Handed will no longer start at login" = "Handed 将不再于登录时启动";
+"Menu Bar Only (Hide Dock Icon)" = "仅菜单栏模式 (隐藏 Dock 图标)";
+"Preferences" = "首选项";
+
+// DNS Configuration View
+"DNS Records" = "DNS 记录";
+"No DNS records configured" = "未配置 DNS 记录";
+"Add DNS overrides, upstream servers, or local-only domains" = "添加 DNS 覆盖、上游服务器或仅本地解析的域名";
+"Add Your First Record" = "添加您的第一条记录";
+"Test Resolution" = "测试解析";
+"Delete Record" = "删除记录";
+"Are you sure you want to delete the record for '%@'?" = "您确定要删除 '%@' 的记录吗？";
+"DNS Test Result" = "DNS 测试结果";
+"Test Passed" = "测试通过";
+"Test Failed" = "测试失败";
+"Domain:" = "域名:";
+"Expected:" = "预期:";
+"Resolved:" = "解析为:";
+"No response from DNS server. Is dnsmasq running?" = "DNS 服务器无响应。dnsmasq 是否在运行？";
+"DNS resolution successful" = "DNS 解析成功";
+"Resolved IP doesn't match expected value" = "解析的 IP 与预期值不符";
+"Test failed: %@" = "测试失败: %@";
+
+// DNS Record Types
+"Address Override" = "地址覆盖";
+"Upstream Server" = "上游服务器";
+"Local Only" = "仅本地解析";
+"Override DNS resolution for a domain to a specific IP" = "将域名的 DNS 解析覆盖为特定 IP";
+"Use a specific DNS server for a domain" = "为域名使用特定的 DNS 服务器";
+"Only answer from local configuration, never forward" = "仅从本地配置中回答，绝不进行转发";
+
+// DNS Record Editor
+"Edit DNS Record" = "编辑 DNS 记录";
+"Add DNS Record" = "添加 DNS 记录";
+"Record Type" = "记录类型";
+"Type" = "类型";
+"Domain" = "域名";
+"IP Address" = "IP 地址";
+"DNS Server" = "DNS 服务器";
+"Comment (optional)" = "备注 (可选)";
+"Description or notes" = "描述或备注";
+"Config Preview" = "配置预览";
+"The domain name to override (e.g., myapp.local)" = "要覆盖的域名 (例如: myapp.local)";
+"Domain to route to specific DNS, or leave empty for all queries" = "路由到指定 DNS 的域名，或留空以适用于所有查询";
+"Domain that should only be answered locally" = "只应在本地应答的域名";
+"The IP address this domain should resolve to" = "此域名应解析到的 IP 地址";
+"The DNS server IP to use for this domain" = "此域名要使用的 DNS 服务器 IP";
+"corp.example.com (or empty for all)" = "corp.example.com (或留空表示全部)";
+"# Enter a domain to see preview" = "# 输入域名以查看预览";
+
+
+// DHCP Configuration View
+"Ranges (%d)" = "IP 范围 (%d)";
+"Static Hosts (%d)" = "静态主机 (%d)";
+"Options (%d)" = "DHCP 选项 (%d)";
+"Add DHCP Range" = "添加 DHCP 范围";
+"Add Static Host" = "添加静态主机";
+"Add DHCP Option" = "添加 DHCP 选项";
+"No DHCP ranges configured" = "未配置 DHCP 范围";
+"No static hosts configured" = "未配置静态主机";
+"No DHCP options configured" = "未配置 DHCP 选项";
+"Delete Entry" = "删除条目";
+"Are you sure you want to delete this DHCP entry?" = "您确定要删除此 DHCP 条目吗？";
+"Netmask: %@" = "子网掩码: %@";
+
+// DHCP Editors
+"Edit DHCP Range" = "编辑 DHCP 范围";
+"Start IP" = "起始 IP";
+"End IP" = "结束 IP";
+"Netmask (optional)" = "子网掩码 (可选)";
+"Lease Time (e.g., 12h, 1d)" = "租约时间 (例如: 12h, 1d)";
+"Edit Static Host" = "编辑静态主机";
+"MAC Address" = "MAC 地址";
+"Hostname (optional)" = "主机名 (可选)";
+"Lease Time (optional)" = "租约时间 (可选)";
+"Edit DHCP Option" = "编辑 DHCP 选项";
+"Use Custom Option Number" = "使用自定义选项编号";
+"Option Number" = "选项编号";
+"Value" = "值";
+"Option" = "选项";
+"Option %d" = "选项 %d";
+
+// DHCP Option Names
+"Subnet Mask" = "子网掩码";
+"Router/Gateway" = "路由器/网关";
+"DNS Server" = "DNS 服务器";
+"Domain Name" = "域名";
+"Broadcast Address" = "广播地址";
+"NTP Server" = "NTP 服务器";
+"WINS Server" = "WINS 服务器";
+"Domain Search List" = "域名搜索列表";
+
+// Service Control View
+"Execution Mode" = "运行模式";
+"Mode" = "模式";
+"dnsmasq Service" = "dnsmasq 服务";
+"PID: %d" = "PID: %d";
+"Mode: %@" = "模式: %@";
+"Start" = "启动";
+"Stop" = "停止";
+"Restart" = "重启";
+"Quick Actions" = "快速操作";
+"Refresh Status" = "刷新状态";
+"Validate Config" = "校验配置";
+"Save & Restart" = "保存并重启";
+"Paths" = "路径";
+"dnsmasq binary:" = "dnsmasq 二进制路径:";
+"Config file:" = "配置文件路径:";
+"Output" = "输出";
+"No output" = "无输出";
+"Service Settings" = "服务设置";
+"dnsmasq Binary Path" = "dnsmasq 二进制路径";
+"Config File Path" = "配置文件路径";
+"Mode Information" = "运行模式说明";
+"Homebrew Services" = "Homebrew Services";
+"Uses 'brew services' to manage dnsmasq. The service will start automatically on boot and is managed by launchd." = "使用 'brew services' 管理 dnsmasq。服务将在开机时自动启动并由 launchd 托管。";
+"Local Process" = "本地进程";
+"Runs dnsmasq directly as a process. You have full control but the service won't persist after reboot unless you start it again." = "直接将 dnsmasq 作为本地进程运行。您拥有完全控制权，但重启后服务不会保留，需要手动再次启动。";
+"Select dnsmasq binary" = "选择 dnsmasq 二进制文件";
+"Select dnsmasq configuration file" = "选择 dnsmasq 配置文件";
+"Configuration Validation" = "配置校验";
+"Configuration is valid and ready to use." = "配置有效，可以使用。";
+"Validation failed: %@" = "校验失败: %@";
+
+// Resolver Config View
+"Resolver Routes" = "解析器路由";
+"No resolver files configured" = "未配置解析器文件";
+"Manage macOS resolver files in /etc/resolver to route specific domains to dnsmasq" = "在 /etc/resolver 中管理 macOS 解析器文件，以将特定域名路由到 dnsmasq";
+"Add Resolver File" = "添加解析器文件";
+"Status" = "状态";
+"Add Resolver" = "添加解析器";
+"Are you sure you want to delete the resolver file for '%@'?" = "您确定要删除 '%@' 的解析器文件吗？";
+"Edit Resolver" = "编辑解析器";
+"Edit Resolver File" = "编辑解析器文件";
+"Edit resolver file" = "编辑解析器文件";
+"Nameserver" = "名称服务器";
+"Port" = "端口";
+"Port (optional)" = "端口 (可选)";
+"Custom Port" = "自定义端口";
+"Only check to use a custom port (dnsmasq defaults to 53)" = "仅在需要使用自定义端口时勾选 (dnsmasq 默认端口为 53)";
+"Path: %@" = "路径: %@";
+"Exists" = "存在";
+"Missing" = "不存在";
+
+// Log Viewer View
+"Logs" = "日志";
+"Filter logs..." = "过滤日志...";
+"Auto-scroll" = "自动滚动";
+"Clear" = "清除";
+"Export" = "导出";
+"Monitoring" = "监控中";
+"No log entries yet" = "暂无日志条目";
+"Start Monitoring" = "开始监控";
+"No matching log entries" = "没有匹配的日志条目";
+"%d entries" = "%d 条日志";
+"(filtered from %d)" = "(从 %d 条中过滤)";
+"Last updated: %@" = "最后更新时间: %@";
+"No log entries found" = "未找到日志条目";
+"Logs require log-queries to be enabled in dnsmasq.conf." = "查看日志需要先在 dnsmasq.conf 中启用 log-queries。";
+"Configure Logs" = "配置日志";
+"Configure logging" = "配置日志记录";
+"Log file path:" = "日志文件路径:";
+"Log Queries" = "记录 DNS 查询";
+"Log extra info for each DNS query" = "记录每次 DNS 查询的详细信息";
+"Log DHCP" = "记录 DHCP";
+"Log extra info for DHCP transactions" = "记录 DHCP 事务的详细信息";
+"Save & Restart Service" = "保存并重启服务";
+
+// Troubleshooting View
+"Troubleshooting Tools" = "故障排除工具";
+"Quick Actions" = "快速操作";
+"Flush DNS Cache" = "刷新 DNS 缓存";
+"Clear macOS DNS cache and restart mDNSResponder" = "清理 macOS DNS 缓存并重启 mDNSResponder 服务";
+"Create Resolver Directory" = "创建解析器目录";
+"Create /etc/resolver if it doesn't exist" = "若不存在则创建 /etc/resolver 目录";
+"Restart dnsmasq" = "重启 dnsmasq";
+"Restart dnsmasq via Homebrew services" = "通过 Homebrew services 重启 dnsmasq 服务";
+"Check dnsmasq Status" = "检查 dnsmasq 状态";
+"Show current dnsmasq service status" = "查看当前的 dnsmasq 服务运行状态";
+"DNS Testing" = "DNS 测试";
+"Test Domain Resolution" = "测试域名解析";
+"Enter domain (e.g., myapp.local)" = "输入要测试的域名 (例如: myapp.local)";
+"Test" = "测试";
+"Configuration Verification" = "配置文件校验";
+"Search dnsmasq.conf" = "搜索 dnsmasq.conf";
+"Search pattern (e.g., domain name)" = "搜索关键字 (例如: 域名)";
+"Search" = "搜索";
+"View Full Config" = "查看完整配置";
+"List Resolver Files" = "列出解析器文件";
+"Check Port 53" = "检查 53 端口";
+"Command Output" = "命令输出";
+"Running..." = "运行中...";
+"Clear" = "清除";
+"Copy" = "复制";
+"Run a command to see output here..." = "运行上方命令在此处查看输出结果...";
+"Flushing DNS cache..." = "正在刷新 DNS 缓存...";
+"Creating resolver directory..." = "正在创建解析器目录...";
+"Restarting dnsmasq..." = "正在重启 dnsmasq...";
+"Checking dnsmasq status..." = "正在检查 dnsmasq 状态...";
+"Testing DNS resolution for %@..." = "正在测试 %@ 的 DNS 解析...";
+"Testing DNS via dig @127.0.0.1 for %@..." = "正在通过 dig @127.0.0.1 测试 %@ 的解析...";
+"Testing DNS via nslookup for %@..." = "正在通过 nslookup 测试 %@ 的解析...";
+"Searching dnsmasq.conf for '%@'..." = "正在 dnsmasq.conf 中搜索 '%@'...";
+"Viewing dnsmasq.conf..." = "正在查看 dnsmasq.conf 配置...";
+"Listing resolver files..." = "正在列出解析器文件...";
+"Checking port 53..." = "正在检查 53 端口...";
+"Error: %@" = "错误: %@";
+"Command completed (no output)" = "命令执行完成 (无输出)";
+
+// Backup & Import View
+"Backup & Restore" = "备份与恢复";
+"Create Backup" = "创建备份";
+"Restore from File" = "从文件恢复";
+"Preset TLDs" = "预设 TLD";
+"Import Hosts File" = "导入 Hosts 文件";
+"Backups" = "备份列表";
+"Export configuration backups and restore them" = "导出配置备份并可以进行恢复";
+"No backups found" = "未找到备份";
+"Restore" = "恢复";
+"Are you sure you want to restore the configuration from this backup? Current configuration will be overwritten." = "您确定要从此备份恢复配置吗？当前配置将被覆盖。";
+"Preset Top-Level Domains" = "预设顶级域名 (TLD)";
+"Configure resolver files and DNS overrides for common development TLDs" = "为常用开发 TLD 配置解析器文件和 DNS 覆盖";
+"This will create DNS records and resolver files routing the selected TLD to 127.0.0.1" = "这将在 DNS 配置和解析器文件中创建相应记录，把所选 TLD 路由到 127.0.0.1";
+"Setup Preset TLD" = "设置预设 TLD";
+"Setup Preset TLD: %@" = "设置预设 TLD: %@";
+"Hosts File Import" = "Hosts 文件导入";
+"Import records from a hosts-formatted file" = "从 hosts 格式的文件中导入记录";
+"Select Hosts File" = "选择 Hosts 文件";
+"records" = "条记录";
+"Select backup file" = "选择备份文件";
+"Select hosts file to import" = "选择要导入的 hosts 文件";
+"Backup created successfully" = "备份创建成功";
+"Backup file:" = "备份文件:";
+"Restore successful" = "恢复成功";
+"Configuration restored. Restart dnsmasq to apply changes." = "配置已恢复。请重启 dnsmasq 以应用更改。";
+"Import Successful" = "导入成功";
+"Imported %d records into DNS configuration." = "已将 %d 条记录导入到 DNS 配置。";
+"Failed to import records: %@" = "导入记录失败: %@";
+"TLD Setup Successful" = "TLD 设置成功";
+"Configured DNS override and resolver file for .%@. Restart service to apply." = "已为 .%@ 配置 DNS 覆盖和解析器文件。请重启服务以应用更改。";
+"Failed to configure TLD: %@" = "配置 TLD 失败: %@";
+
+// About View Description & Copyright
+"A native macOS GUI for managing dnsmasq and DNS resolvers" = "用于管理 dnsmasq 和 DNS 解析器的原生 macOS 界面";
+"Created by Justin James" = "由 Justin James 开发";
+"© 2026 Justin James. MIT License." = "© 2026 Justin James. MIT 授权协议。";
+
+// Help Content Keys
+"Help_GettingStarted_Content" = "1. 通过 Homebrew 安装 dnsmasq：brew install dnsmasq\n2. 使用“服务控制”启动/停止 dnsmasq\n3. 添加 DNS 记录以覆盖域名解析\n4. 配置解析器文件以路由 DNS 查询\n5. 保存更改并重启服务";
+
+"Help_DNSConfig_Content" = "• 地址覆盖 (Address Override)：将域名映射到指定 IP\n• 上游服务器 (Upstream Server)：将查询路由到指定 DNS\n• 仅限本地 (Local Only)：仅从本地配置中回答查询\n\n点击 + 可以添加记录，点击画笔图标可以编辑，或右键调出操作菜单。\n使用“测试”按钮来验证 DNS 解析状态。";
+
+"Help_DHCPConfig_Content" = "• IP 范围 (Ranges)：定义 DHCP IP 地址池\n• 静态主机 (Static Hosts)：为指定 MAC 地址分配固定 IP\n• 选项 (Options)：配置网关、DNS 服务器等\n\n更改配置后需要保存并重启服务方可生效。";
+
+"Help_ResolverFiles_Content" = "管理 /etc/resolver 目录下的 macOS 解析器文件：\n• 将特定域名路由到自定义 DNS 服务器\n• 将 .local、.test 等域名指向 127.0.0.1\n\n创建如 /etc/resolver/local 的文件可将所有 *.local 查询路由到您本地的 dnsmasq。\n\n示例：/etc/resolver/mycompany.cloud\n→ 将所有 *.mycompany.cloud 查询路由到 127.0.0.1";
+
+"Help_QuickSetup_Content" = "只需 5 步即可完成设置：\n\n1. 安装 dnsmasq：\n   brew install dnsmasq\n\n2. 在“DNS 配置”中添加 DNS 记录\n   (address=/mydomain.local/127.0.0.1)\n\n3. 在“解析器文件”中创建解析器文件\n   (/etc/resolver/mydomain.local → 127.0.0.1)\n\n4. 通过“服务控制”启动 dnsmasq\n\n5. 在“故障排除”中刷新 DNS 缓存\n   (或在终端运行：sudo dscacheutil -flushcache)";
+
+"Help_ServiceControl_Content" = "两种运行模式：\n• Homebrew Services：常驻运行，开机自启，由 launchd 托管\n• 本地进程 (Local Process)：手动控制，不具备持久性\n\n使用“设置”可配置自定义路径。";
+
+"Help_LogViewer_Content" = "实时查看 dnsmasq 日志：\n• 使用搜索框过滤日志条目\n• 开启“自动滚动”以跟踪最新日志\n• 导出日志以用于排错诊断";
+
+"Help_KeyboardShortcuts_Content" = "⌘R - 重新加载配置\n⇧⌘S - 启动服务\n⇧⌘X - 停止服务\n⇧⌘R - 重启服务";
+
+"Help_Troubleshooting_Content" = "常见问题与解决方案：\n\nDNS 无法解析？\n1. 刷新 DNS 缓存 (故障排除 → 刷新 DNS)\n2. 确认 dnsmasq 是否正在运行 (检查服务控制)\n3. 检查您的域名是否存在对应的解析器文件\n4. 用此命令测试：dig @127.0.0.1 yourdomain.local\n\n服务无法启动？\n• 检查 53 端口占用情况：sudo lsof -i :53\n• 先停止冲突的 DNS 服务\n\n测试 DNS 解析：\n• dscacheutil -q host -a name yourdomain.local\n• dig @127.0.0.1 yourdomain.local\n• nslookup yourdomain.local 127.0.0.1\n\n配置文件路径：/opt/homebrew/etc/dnsmasq.conf\n解析器目录：/etc/resolver/";
+
+// Backup & Restore View (Actual)
+"Backup Configuration" = "备份配置";
+"Save your current dnsmasq configuration and resolver files to a backup folder." = "保存您当前的 dnsmasq 配置文件和解析器路由文件到备份文件夹中。";
+"Backs up: dnsmasq.conf + /etc/resolver/* files" = "备份内容：dnsmasq.conf 配置文件 + /etc/resolver/* 解析器路由文件";
+"Restore Configuration" = "恢复配置";
+"Restore a previous backup of your dnsmasq configuration." = "恢复之前备份的 dnsmasq 配置文件。";
+"Restore from Backup" = "从备份中恢复";
+"Select a backup folder created by Handed" = "选择一个由 Handed 创建的备份文件夹";
+"Import from Hosts Format" = "从 Hosts 格式导入";
+"Import DNS entries from /etc/hosts format or paste entries directly." = "从 /etc/hosts 格式导入 DNS 记录，或直接粘贴记录内容。";
+"Import /etc/hosts" = "导入 /etc/hosts";
+"Paste Entries" = "粘贴记录";
+"Format: IP_ADDRESS HOSTNAME (e.g., 127.0.0.1 myapp.local)" = "格式：IP地址 主机名 (例如: 127.0.0.1 myapp.local)";
+"Export Configuration" = "导出配置";
+"Export your DNS records to various formats for sharing or documentation." = "将您的 DNS 记录导出为不同的格式以供分享或归档记录。";
+"Export as Hosts" = "导出为 Hosts 文件";
+"Export dnsmasq.conf" = "导出 dnsmasq.conf";
+"Quick TLD Presets" = "快速顶级域名预设";
+"One-click setup for common local development TLDs. Creates resolver files pointing to 127.0.0.1." = "一键设置常用的本地开发顶级域名 (TLD)。创建指向 127.0.0.1 的解析器文件。";
+"Local Development" = "本地开发域名";
+"*.local" = "*.local";
+"*.test" = "*.test";
+"*.dev" = "*.dev";
+"*.localhost" = "*.localhost";
+"*.internal" = "*.internal";
+"*.lan" = "*.lan";
+"Kubernetes / Cloud" = "Kubernetes / 云原生";
+"K8s internal" = "K8s 内部集群";
+"K8s services" = "K8s 服务路由";
+"AWS Local Emulation" = "AWS 本地模拟";
+"Route AWS service domains to localhost for local development with LocalStack, ElasticMQ, etc." = "将 AWS 服务域名路由到 localhost，以便使用 LocalStack、ElasticMQ 等进行本地开发。";
+"All AWS" = "所有 AWS 域名";
+"ElastiCache" = "ElastiCache 缓存";
+"RDS" = "RDS 数据库";
+"SQS" = "SQS 消息队列";
+"S3" = "S3 对象存储";
+"Important: DNS alone is not enough for AWS SDK services" = "重要提示：仅有 DNS 路由不足以使用 AWS SDK 服务";
+"You also need endpoint configuration in your app:" = "您还需要在应用中配置以下环境变量的终端节点：";
+"Custom Domain" = "自定义域名";
+"Create a resolver for any custom domain." = "为任意自定义域名创建解析器。";
+"Domain (e.g., mycompany.cloud)" = "输入域名 (例如: mycompany.cloud)";
+"Create" = "创建";
+"Creates /etc/resolver/%@ → 127.0.0.1" = "将创建 /etc/resolver/%@ → 127.0.0.1 的路由";
+"Dismiss" = "关闭提示";
+"Choose Backup Location" = "选择备份保存位置";
+"Backup created successfully at %@" = "备份已成功创建并保存在 %@";
+"Backup failed: %@" = "备份失败: %@";
+"Select Backup Folder" = "选择备份文件夹";
+"Not a valid Handed backup folder" = "该文件夹不是有效的 Handed 备份目录";
+"Configuration restored successfully" = "配置已成功恢复";
+"Restore failed: %@" = "恢复失败: %@";
+"No valid entries found in /etc/hosts" = "在 /etc/hosts 中未找到有效的记录条目";
+"Imported %d entries from /etc/hosts" = "成功从 /etc/hosts 导入了 %d 条记录";
+"Failed to read /etc/hosts: %@" = "读取 /etc/hosts 失败: %@";
+"No valid entries found" = "未找到有效的记录条目";
+"Imported %d entries" = "成功导入了 %d 条记录";
+"Export as Hosts File" = "导出为 Hosts 文件";
+"Exported to %@" = "成功导出文件到 %@";
+"Export failed: %@" = "导出失败: %@";
+"Created resolver for *.%@ → 127.0.0.1" = "成功创建 *.%@ → 127.0.0.1 的解析器文件";
+"Failed to create resolver for .%@" = "为 .%@ 创建解析器文件失败";
+"Created by Handed for *.%@ domains" = "由 Handed 创建，用于 *.%@ 域名";
+"Imported from hosts" = "从 hosts 导入";
+"Unknown error" = "未知错误";
+"Script error: %@" = "脚本执行错误: %@";
+"Import DNS Entries" = "导入 DNS 记录";
+"Paste entries in hosts file format (IP ADDRESS followed by HOSTNAME):" = "粘贴 hosts 格式的记录（即 IP地址 后面跟 主机名）：";
+"Example:\n127.0.0.1 myapp.local\n192.168.1.100 database.internal api.internal" = "示例：\n127.0.0.1 myapp.local\n192.168.1.100 database.internal api.internal";
+"Import" = "导入";
+"Cancel" = "取消";

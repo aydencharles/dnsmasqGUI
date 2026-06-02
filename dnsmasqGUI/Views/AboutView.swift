@@ -29,13 +29,13 @@ struct AboutView: View {
                     .font(.title)
                     .fontWeight(.bold)
 
-                Text("Version \(AppInfo.version) (\(AppInfo.build))")
+                Text(String(format: "Version %@ (%@)".localized, AppInfo.version, AppInfo.build))
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
 
             // Description
-            Text("A native macOS GUI for managing dnsmasq and DNS resolvers")
+            Text("A native macOS GUI for managing dnsmasq and DNS resolvers".localized)
                 .font(.body)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -45,21 +45,21 @@ struct AboutView: View {
 
             // Credits
             VStack(spacing: 8) {
-                Text("Created by Justin James")
+                Text("Created by Justin James".localized)
                     .font(.callout)
 
-                Link("GitHub Repository", destination: URL(string: "https://github.com/thejustinjames/handed")!)
+                Link("GitHub Repository".localized, destination: URL(string: "https://github.com/thejustinjames/handed")!)
                     .font(.callout)
             }
 
             Spacer()
 
             // Copyright
-            Text("© 2026 Justin James. MIT License.")
+            Text("© 2026 Justin James. MIT License.".localized)
                 .font(.caption)
                 .foregroundColor(.secondary)
 
-            Button("Close") {
+            Button("Close".localized) {
                 dismiss()
             }
             .keyboardShortcut(.escape)
@@ -76,10 +76,10 @@ struct HelpView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("Handed Help")
+                Text("Handed Help".localized)
                     .font(.headline)
                 Spacer()
-                Button("Close") { dismiss() }
+                Button("Close".localized) { dismiss() }
             }
             .padding()
 
@@ -88,138 +88,57 @@ struct HelpView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     HelpSection(
-                        title: "Getting Started",
+                        title: "Getting Started".localized,
                         icon: "play.circle",
-                        content: """
-                        1. Install dnsmasq via Homebrew: brew install dnsmasq
-                        2. Use Service Control to start/stop dnsmasq
-                        3. Add DNS records to override domain resolution
-                        4. Configure resolver files to route DNS queries
-                        5. Save changes and restart the service
-                        """
+                        content: "Help_GettingStarted_Content".localized
                     )
 
                     HelpSection(
-                        title: "DNS Configuration",
+                        title: "DNS Configuration".localized,
                         icon: "network",
-                        content: """
-                        • Address Override: Map a domain to a specific IP
-                        • Upstream Server: Route queries to specific DNS
-                        • Local Only: Answer from local config only
-
-                        Click + to add, pencil to edit, or right-click for options.
-                        Use the Test button to verify DNS resolution.
-                        """
+                        content: "Help_DNSConfig_Content".localized
                     )
 
                     HelpSection(
-                        title: "DHCP Configuration",
+                        title: "DHCP Configuration".localized,
                         icon: "server.rack",
-                        content: """
-                        • Ranges: Define DHCP IP address pools
-                        • Static Hosts: Assign fixed IPs to MAC addresses
-                        • Options: Configure gateway, DNS, etc.
-
-                        Changes require saving and restarting the service.
-                        """
+                        content: "Help_DHCPConfig_Content".localized
                     )
 
                     HelpSection(
-                        title: "Resolver Files",
+                        title: "Resolver Files".localized,
                         icon: "folder.badge.gearshape",
-                        content: """
-                        Manage macOS resolver files in /etc/resolver:
-                        • Route specific domains to custom DNS servers
-                        • Point .local, .test, etc. to 127.0.0.1
-
-                        Create files like /etc/resolver/local to route
-                        all *.local queries to your local dnsmasq.
-
-                        Example: /etc/resolver/mycompany.cloud
-                        → Routes all *.mycompany.cloud to 127.0.0.1
-                        """
+                        content: "Help_ResolverFiles_Content".localized
                     )
 
                     HelpSection(
-                        title: "Quick Setup Guide",
+                        title: "Quick Setup Guide".localized,
                         icon: "list.number",
-                        content: """
-                        Complete setup in 5 steps:
-
-                        1. Install dnsmasq:
-                           brew install dnsmasq
-
-                        2. Add DNS records in DNS Configuration
-                           (address=/mydomain.local/127.0.0.1)
-
-                        3. Create resolver file in Resolver Files
-                           (/etc/resolver/mydomain.local → 127.0.0.1)
-
-                        4. Start dnsmasq via Service Control
-
-                        5. Flush DNS cache in Troubleshooting
-                           (or run: sudo dscacheutil -flushcache)
-                        """
+                        content: "Help_QuickSetup_Content".localized
                     )
 
                     HelpSection(
-                        title: "Service Control",
+                        title: "Service Control".localized,
                         icon: "gearshape.2",
-                        content: """
-                        Two execution modes:
-                        • Homebrew Services: Persistent, auto-starts on boot
-                        • Local Process: Manual control, no persistence
-
-                        Use Settings to configure custom paths.
-                        """
+                        content: "Help_ServiceControl_Content".localized
                     )
 
                     HelpSection(
-                        title: "Log Viewer",
+                        title: "Log Viewer".localized,
                         icon: "doc.text.magnifyingglass",
-                        content: """
-                        View dnsmasq logs in real-time.
-                        • Use the search box to filter entries
-                        • Enable Auto-scroll to follow new logs
-                        • Export logs for troubleshooting
-                        """
+                        content: "Help_LogViewer_Content".localized
                     )
 
                     HelpSection(
-                        title: "Keyboard Shortcuts",
+                        title: "Keyboard Shortcuts".localized,
                         icon: "keyboard",
-                        content: """
-                        ⌘R - Reload Configuration
-                        ⇧⌘S - Start Service
-                        ⇧⌘X - Stop Service
-                        ⇧⌘R - Restart Service
-                        """
+                        content: "Help_KeyboardShortcuts_Content".localized
                     )
 
                     HelpSection(
-                        title: "Troubleshooting",
+                        title: "Troubleshooting".localized,
                         icon: "wrench.and.screwdriver",
-                        content: """
-                        Common issues and solutions:
-
-                        DNS not resolving?
-                        1. Flush DNS cache (Troubleshooting → Flush DNS)
-                        2. Verify dnsmasq is running (check Service Control)
-                        3. Check resolver file exists for your domain
-                        4. Test with: dig @127.0.0.1 yourdomain.local
-
-                        Service won't start?
-                        • Check port 53: sudo lsof -i :53
-                        • Stop conflicting services first
-
-                        Testing DNS resolution:
-                        • dscacheutil -q host -a name yourdomain.local
-                        • dig @127.0.0.1 yourdomain.local
-                        • nslookup yourdomain.local 127.0.0.1
-
-                        Config: /opt/homebrew/etc/dnsmasq.conf
-                        Resolvers: /etc/resolver/
-                        """
+                        content: "Help_Troubleshooting_Content".localized
                     )
                 }
                 .padding()
@@ -264,6 +183,7 @@ struct AppInfo {
     static let name = "Handed"
     static let author = "Justin James"
 }
+
 
 #Preview {
     AboutView()

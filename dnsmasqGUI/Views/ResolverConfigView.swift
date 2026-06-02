@@ -14,7 +14,7 @@ struct ResolverConfigView: View {
         VStack(spacing: 0) {
             // Toolbar
             HStack {
-                Text("Resolver Files")
+                Text("Resolver Files".localized)
                     .font(.headline)
 
                 Text("/etc/resolver/")
@@ -28,7 +28,7 @@ struct ResolverConfigView: View {
                 Spacer()
 
                 Button(action: { isAddingFile = true }) {
-                    Label("Add Resolver", systemImage: "plus")
+                    Label("Add Resolver".localized, systemImage: "plus")
                 }
 
                 Button(action: {
@@ -37,7 +37,7 @@ struct ResolverConfigView: View {
                         isEditingFile = true
                     }
                 }) {
-                    Label("Edit", systemImage: "pencil")
+                    Label("Edit".localized, systemImage: "pencil")
                 }
                 .disabled(selectedFile == nil)
 
@@ -47,7 +47,7 @@ struct ResolverConfigView: View {
                         showDeleteConfirmation = true
                     }
                 }) {
-                    Label("Delete", systemImage: "trash")
+                    Label("Delete".localized, systemImage: "trash")
                 }
                 .disabled(selectedFile == nil)
 
@@ -59,7 +59,7 @@ struct ResolverConfigView: View {
                         await resolverManager.loadResolverFiles()
                     }
                 }) {
-                    Label("Reload", systemImage: "arrow.clockwise")
+                    Label("Reload".localized, systemImage: "arrow.clockwise")
                 }
             }
             .padding()
@@ -70,7 +70,7 @@ struct ResolverConfigView: View {
             // Content
             if resolverManager.isLoading {
                 Spacer()
-                ProgressView("Loading resolver files...")
+                ProgressView("Loading resolver files...".localized)
                 Spacer()
             } else if let error = resolverManager.error {
                 Spacer()
@@ -81,7 +81,7 @@ struct ResolverConfigView: View {
                     Text(error)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
-                    Button("Retry") {
+                    Button("Retry".localized) {
                         Task {
                             await resolverManager.loadResolverFiles()
                         }
@@ -96,17 +96,17 @@ struct ResolverConfigView: View {
                         .font(.system(size: 48))
                         .foregroundColor(.secondary)
 
-                    Text("No Resolver Files Found")
+                    Text("No Resolver Files Found".localized)
                         .font(.headline)
 
-                    Text("Resolver files in /etc/resolver/ route DNS queries for specific domains to custom DNS servers.")
+                    Text("Resolver files in /etc/resolver/ route DNS queries for specific domains to custom DNS servers.".localized)
                         .font(.callout)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: 400)
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Common use cases:")
+                        Text("Common use cases:".localized)
                             .font(.caption)
                             .fontWeight(.medium)
 
@@ -114,7 +114,7 @@ struct ResolverConfigView: View {
                             Image(systemName: "arrow.right")
                                 .font(.caption2)
                                 .foregroundColor(.secondary)
-                            Text("Route .local domains to your local dnsmasq")
+                            Text("Route .local domains to your local dnsmasq".localized)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -123,7 +123,7 @@ struct ResolverConfigView: View {
                             Image(systemName: "arrow.right")
                                 .font(.caption2)
                                 .foregroundColor(.secondary)
-                            Text("Route .test or .dev domains to localhost")
+                            Text("Route .test or .dev domains to localhost".localized)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -132,7 +132,7 @@ struct ResolverConfigView: View {
                             Image(systemName: "arrow.right")
                                 .font(.caption2)
                                 .foregroundColor(.secondary)
-                            Text("Route corporate domains to internal DNS")
+                            Text("Route corporate domains to internal DNS".localized)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -143,7 +143,7 @@ struct ResolverConfigView: View {
                             .fill(Color(NSColor.controlBackgroundColor))
                     )
 
-                    Button("Create Your First Resolver") {
+                    Button("Create Your First Resolver".localized) {
                         isAddingFile = true
                     }
                     .buttonStyle(.borderedProminent)
@@ -159,15 +159,15 @@ struct ResolverConfigView: View {
                         })
                         .tag(file)
                         .contextMenu {
-                            Button("Edit") {
+                            Button("Edit".localized) {
                                 fileToEdit = file
                                 isEditingFile = true
                             }
-                            Button("View File Content") {
+                            Button("View File Content".localized) {
                                 // Could show a preview
                             }
                             Divider()
-                            Button("Delete", role: .destructive) {
+                            Button("Delete".localized, role: .destructive) {
                                 fileToDelete = file
                                 showDeleteConfirmation = true
                             }
@@ -181,7 +181,7 @@ struct ResolverConfigView: View {
             HStack {
                 Image(systemName: "info.circle")
                     .foregroundColor(.secondary)
-                Text("Resolver files route DNS queries for specific TLDs to custom nameservers")
+                Text("Resolver files route DNS queries for specific TLDs to custom nameservers".localized)
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Spacer()
@@ -209,16 +209,16 @@ struct ResolverConfigView: View {
                 }
             }
         }
-        .alert("Delete Resolver File", isPresented: $showDeleteConfirmation, presenting: fileToDelete) { file in
-            Button("Cancel", role: .cancel) { }
-            Button("Delete", role: .destructive) {
+        .alert("Delete Resolver File".localized, isPresented: $showDeleteConfirmation, presenting: fileToDelete) { file in
+            Button("Cancel".localized, role: .cancel) { }
+            Button("Delete".localized, role: .destructive) {
                 Task {
                     _ = await resolverManager.deleteResolverFile(file)
                     selectedFile = nil
                 }
             }
         } message: { file in
-            Text("Are you sure you want to delete the resolver file for '\(file.domain)'?\n\nThis will remove /etc/resolver/\(file.domain)")
+            Text(String(format: "Are you sure you want to delete the resolver file for '%@'?\n\nThis will remove /etc/resolver/%@".localized, file.domain, file.domain))
         }
     }
 }
@@ -276,7 +276,7 @@ struct ResolverFileRow: View {
                     .foregroundColor(.accentColor)
             }
             .buttonStyle(.plain)
-            .help("Edit resolver file")
+            .help("Edit resolver file".localized)
         }
         .padding(.vertical, 4)
         .contentShape(Rectangle())
@@ -327,10 +327,10 @@ struct ResolverFileEditor: View {
         VStack(spacing: 0) {
             // Header
             HStack {
-                Text(mode.isEditing ? "Edit Resolver File" : "Add Resolver File")
+                Text(mode.isEditing ? "Edit Resolver File".localized : "Add Resolver File".localized)
                     .font(.headline)
                 Spacer()
-                Button("Cancel") {
+                Button("Cancel".localized) {
                     dismiss()
                 }
             }
@@ -342,7 +342,7 @@ struct ResolverFileEditor: View {
                 VStack(alignment: .leading, spacing: 16) {
                     // Domain field
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Domain / TLD")
+                        Text("Domain / TLD".localized)
                             .font(.subheadline)
                             .fontWeight(.medium)
 
@@ -356,7 +356,7 @@ struct ResolverFileEditor: View {
                                 .disabled(mode.isEditing)
                         }
 
-                        Text("The filename determines which domains are routed (e.g., 'local' routes all *.local queries)")
+                        Text("The filename determines which domains are routed (e.g., 'local' routes all *.local queries)".localized)
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -365,7 +365,7 @@ struct ResolverFileEditor: View {
 
                     // Nameservers field
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Nameservers")
+                        Text("Nameservers".localized)
                             .font(.subheadline)
                             .fontWeight(.medium)
 
@@ -374,18 +374,18 @@ struct ResolverFileEditor: View {
                             .frame(minHeight: 80)
                             .border(Color(NSColor.separatorColor), width: 1)
 
-                        Text("One IP address per line. These DNS servers will handle queries for *.\(domain.isEmpty ? "domain" : domain)")
+                        Text(String(format: "One IP address per line. These DNS servers will handle queries for *.%@".localized, domain.isEmpty ? "domain" : domain))
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
 
                     // Comment field
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Comment (optional)")
+                        Text("Comment (optional)".localized)
                             .font(.subheadline)
                             .fontWeight(.medium)
 
-                        TextField("Description or notes", text: $comment)
+                        TextField("Description or notes".localized, text: $comment)
                             .textFieldStyle(.roundedBorder)
                     }
 
@@ -393,7 +393,7 @@ struct ResolverFileEditor: View {
 
                     // Preview
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("File Preview")
+                        Text("File Preview".localized)
                             .font(.subheadline)
                             .fontWeight(.medium)
 
@@ -409,7 +409,7 @@ struct ResolverFileEditor: View {
 
                     // Usage example
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("How it works")
+                        Text("How it works".localized)
                             .font(.subheadline)
                             .fontWeight(.medium)
 
@@ -417,19 +417,19 @@ struct ResolverFileEditor: View {
                             HStack(alignment: .top) {
                                 Text("1.")
                                     .foregroundColor(.secondary)
-                                Text("macOS checks /etc/resolver/ when resolving domains")
+                                Text("macOS checks /etc/resolver/ when resolving domains".localized)
                                     .font(.caption)
                             }
                             HStack(alignment: .top) {
                                 Text("2.")
                                     .foregroundColor(.secondary)
-                                Text("If a file matches the TLD, those nameservers are used")
+                                Text("If a file matches the TLD, those nameservers are used".localized)
                                     .font(.caption)
                             }
                             HStack(alignment: .top) {
                                 Text("3.")
                                     .foregroundColor(.secondary)
-                                Text("Example: /etc/resolver/local routes *.local to 127.0.0.1")
+                                Text("Example: /etc/resolver/local routes *.local to 127.0.0.1".localized)
                                     .font(.caption)
                             }
                         }
@@ -450,12 +450,12 @@ struct ResolverFileEditor: View {
             HStack {
                 Spacer()
 
-                Button("Cancel") {
+                Button("Cancel".localized) {
                     dismiss()
                 }
                 .keyboardShortcut(.escape)
 
-                Button(mode.isEditing ? "Save" : "Create") {
+                Button(mode.isEditing ? "Save".localized : "Create".localized) {
                     let id: UUID
                     if case .edit(let file) = mode {
                         id = file.id
@@ -483,7 +483,7 @@ struct ResolverFileEditor: View {
 
     private var previewContent: String {
         if domain.isEmpty {
-            return "# Enter a domain to see preview"
+            return "# Enter a domain to see preview".localized
         }
 
         var lines: [String] = []
